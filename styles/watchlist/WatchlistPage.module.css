@@ -1,0 +1,42 @@
+.watchlist{
+    background-color: #181818;
+    color:white;
+    width:100%;
+    height:100vh;
+    overflow-X: hidden;
+}
+
+.watchlist > h2{
+    margin-top:100px;
+    padding-left:40px;
+}
+
+.watchlist .content{
+    display: inline-flex;
+    padding:25px 40px;
+}
+
+.watchlist .content .filters{
+    min-width:300px;
+}
+
+.watchlist .content .body{
+    margin-left:50px;
+    position: relative;
+}
+
+.watchlist .body .loading{
+    margin-top:10px;
+    font-size:35px;
+    justify-self: center;
+}
+
+@media(max-width:768px){
+    .watchlist .content{
+        display: block;
+    }
+
+    .watchlist .body .loading{
+        margin-top:50px;
+    }
+}

@@ -1,0 +1,121 @@
+.users{
+    position: fixed;
+    background-color: #181818;
+    color:white;
+    overflow: auto;
+    overflow-X: hidden;
+    width:100%;
+    height:100vh;
+    padding:0 50px;
+}
+
+.users h2{
+    padding-top:30px;
+    font-size:27px;
+    font-weight:500;
+    text-align: center;
+}
+
+.users .list{
+    position: relative;
+    left:50%;
+    margin-top:60px;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.users .list .sec{
+    margin-right:70px;
+    position: relative;
+    margin-bottom:70px;
+}
+
+.users .list .sec img{
+    width:20vh;
+    height:20vh;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.users .list .sec h3{
+    font-size:14px;
+    color:#d9d9d9;
+    cursor: pointer;
+    margin-top:15px;
+}
+
+.users .list .sec .image{
+    width:25vh;
+    height:25vh;
+    border-radius: 50%;
+    background-color: #d9d9d9;
+    color:black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:60px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.users .list .sec .control{
+    position: absolute;
+    bottom:-50px;
+    left:56%;
+    width: max-content;
+    transform: translateX(-45%);
+}
+
+.users .list .sec .control ul{
+    padding:0;
+}
+
+.users .list .sec .control ul li{
+    display: inline-block;
+    margin-right:25px;
+    cursor: pointer;
+}
+
+@media(max-width:1200px){
+
+    .users h2{
+        margin-bottom:60px;
+        font-size:24px;
+    }
+
+    .users .list{
+        display: flex;
+        flex-direction: column;
+        position:relative;
+        left:60%;
+        margin:auto;
+    }
+    .users .list .sec{
+        margin-bottom:40px;
+    }
+
+    .users .list .sec img{
+        width:15vh;
+        height:15vh;
+    }
+
+    .users .list .sec .image{
+        width:15vh;
+        height:15vh;
+        margin:auto;
+    }
+
+    .users .list .sec .control{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        bottom:0;
+    }
+
+    .users .list .sec .control ul li{
+        margin-right:35px;
+    }
+}

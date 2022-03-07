@@ -1,0 +1,83 @@
+.section{
+    margin:60px 40px;
+    background-color: transparent;
+    overflow: hidden;
+    position: relative;
+}
+
+.section .title{
+    font-size:20px;
+    font-weight:450;
+    margin-bottom:25px;
+}
+
+.section .list{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow: hidden;
+}
+
+.section .list .movie{
+    margin-right:20px;
+    transition: .3s all;
+    position: relative;
+    width:min-content
+}
+
+.section .list .movie img{
+    width:25vh;
+    height:25vh;
+    cursor: pointer;
+}
+
+.section .list .movie:hover{
+    transform:scale(.9);
+}
+
+.section .list .movie h2{
+    margin-top:15px;
+    font-size:15px;
+    font-weight:400;
+    text-align: center;
+    cursor: pointer;
+}
+
+.section .control{
+    position: absolute;
+    display:flex;
+    justify-content: space-between;
+    z-index: 6;
+    width:100%;
+}
+
+.section .control span{
+    font-size:40px;
+    cursor: pointer;
+    transition: .3s all;
+    position: relative;
+    top:90px;
+    color:white;
+}
+
+.section .control span:first-of-type{
+    left:20px;
+}
+
+.section .control span:last-of-type{
+    right:20px;
+}
+
+.section .control span:hover{
+    color:darkred;
+}
+
+
+@media(max-width:1200px){
+    .section .control{
+        display: none;
+    }
+    .section .list{
+        overflow:auto;
+    }
+}

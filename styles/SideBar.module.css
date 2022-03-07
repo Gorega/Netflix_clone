@@ -1,0 +1,122 @@
+.sideBar{
+    position: fixed;
+    top:0;
+    right:0;
+    width:100%;
+    height:100vh;
+    background-color: rgba(0,0,0,.8);
+    transition: .3s all ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.sideBar.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sideBar .content{
+    position: absolute;
+    right:0;
+    top:0;
+    background-color: rgba(0,0,0,.7);
+    width:450px;
+    height:100%;
+    padding:50px;
+}
+
+.sideBar .content .head{
+    display: inline-flex;
+    align-items: center;
+    margin-bottom:50px;
+}
+
+.sideBar .content .head .profileImg{
+    width:5vh;
+    height:5vh;
+}
+
+.sideBar .content .head .profileImg img{
+    width:100%;
+    height:100%;
+}
+
+.sideBar .content .head .info{
+    margin-left:10px;
+}
+
+.sideBar .content .head .info h3{
+    font-size:14px;
+    text-transform: capitalize;
+    font-weight:450px;
+    cursor:default;
+}
+
+.sideBar .content .head .info span{
+    margin-top:3px;
+    font-size:13px;
+    color:#d9d9d9;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    top:-10px;
+}
+
+.sideBar .content .list ul{
+    padding:0;
+}
+
+.sideBar .content .list ul li{
+    display: block;
+    margin-bottom:40px;
+    font-size:23px;
+    font-weight:400;
+    color:#d9d9d9;
+    cursor: pointer;
+    position: relative;
+    left:0;
+    transition: .3s all ease-in-out;
+}
+
+.sideBar .content .list ul li:hover{
+    left:10px;
+}
+
+.sideBar .content .list ul li svg{
+    margin-right:30px;
+    width:10%;
+}
+
+
+.sideBar .content .end{
+    margin-top:100px;
+} 
+
+.sideBar .content .end ul{
+    padding:0;
+    list-style: none;
+}
+
+.sideBar .content .end ul li{
+    font-size:18px;
+    color:#d9d9d9;
+    margin-bottom:20px;
+    font-weight:300;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.sideBar .content .end ul li:hover{
+    font-weight: 500;
+}
+
+@media(max-width:768px) {
+    .sideBar .content{
+        left:0;
+        width:100%;
+    }
+
+    .sideBar .content .list ul li{
+        font-size:20px;
+    }
+}

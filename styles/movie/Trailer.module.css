@@ -1,0 +1,46 @@
+.trailer{
+    position: fixed;
+    height: 100vh;
+    width:100%;
+    background-color: rgba(0,0,0,.8);
+    z-index: 10;
+}
+
+.trailer .body{
+    position: relative;
+    width:80%;
+    height:80%;
+    background-color: #181818;
+    color:white;
+    top:45%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.trailer .body .head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px 20px;
+}
+
+.trailer .body .head h2{
+    font-size:16px;
+    font-weight:400;
+}
+
+.trailer .body .head svg{
+    font-size:20px;
+    cursor: pointer;
+}
+
+.trailer .body .video{
+    margin-top:20px;
+    width:100%;
+    height:100%;
+}
+
+.trailer .body .video video{
+    width:100%;
+    height:100%;
+}

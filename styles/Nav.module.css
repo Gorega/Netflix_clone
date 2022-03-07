@@ -1,0 +1,160 @@
+.navbar{
+    position: fixed;
+    top:0;
+    left:0;
+    z-index:10;
+    height:70px;
+    width:100%;
+    background-color: #111111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:5px 40px;
+    color:#d9d9d9;
+}
+
+.navbar .logo{
+    width:20vh;
+    height:40px;
+    cursor: pointer;
+}
+
+.navbar .logo img{
+    width:100%;
+    height:100%;
+}
+
+.navbar .list{
+    width:70%;
+}
+
+.navbar .list ul li{
+    display: inline-block;
+    margin-right:25px;
+    cursor: pointer;
+    padding-bottom:4px;
+}
+
+.navbar .list ul li:hover{
+    font-weight:bold;
+}
+
+.navbar .list ul li.active{
+    border-bottom:2px solid darkred;
+}
+
+.navbar .end{
+    display: inline-flex;
+    align-items: center;
+}
+
+.navbar .end .searchBox{
+    position: relative;
+    width:300px;
+}
+
+.navbar .end .searchBox input{
+    width:100%;
+    height:40px;
+    padding-left:5px;
+    color:#d9d9d9;
+    position: relative;
+    right:50px;
+    border: 1px solid #7f7f7f;
+    background-color: transparent;
+    font-size:12px;
+}
+
+.navbar .end .searchBox input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    -webkit-user-modify: read-write !important;
+    content: url("../public/img/clear.png");
+    position: relative;
+    cursor: pointer;
+    right:5px;
+    width:1vh;
+    height:1vh;
+}
+
+.navbar .end .searchBox input:focus{
+    outline:none;
+}
+
+.navbar .end .searchBox .searchSugg{
+    position: absolute;
+    top:50px;
+    right: 46px;
+    background-color: #181818;
+    width:100%;
+}
+
+.navbar .end .searchBox .searchSugg ul{
+    padding:0;
+    list-style: none;
+}
+
+.navbar .end .searchBox .searchSugg ul li{
+    padding:15px;
+    cursor: pointer;
+    line-height:1.6;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.navbar .end .searchBox .searchSugg ul li svg{
+    font-size:11px;
+    margin-right:13px;
+}
+
+.navbar .end .searchBox .searchSugg ul li:hover{
+    background-color:#444242;
+}
+
+.navbar .end .account{
+    cursor: pointer;
+    position:relative;
+    right:10px;
+    width: max-content;
+}
+
+.navbar .end .account img{
+    width:33px;
+    height:33px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.navbar .end .account span{
+    font-size:13px;
+    margin-left:5px;
+    position: relative;
+    bottom:15px;
+}
+
+.navbar .end .bar{
+    display: none;
+    font-size:28px;
+    cursor: pointer;
+}
+
+@media(max-width:768px){
+    .navbar .logo{
+        width:15vh;
+    }
+}
+
+@media(max-width:1200px){
+    .navbar .logo{
+        width:12vh;
+    }
+
+    .navbar .list{
+        display:none;
+    }
+    .navbar .end .searchBox,.navbar .end .account{
+        display: none;
+    }
+
+    .navbar .end .bar{
+        display: block;
+    }
+}

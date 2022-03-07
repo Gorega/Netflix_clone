@@ -1,0 +1,210 @@
+.main{
+    padding:40px;
+    display: flex;
+}
+
+.main .leftSec{
+    width:80%;
+}
+
+.main .leftSec .cast,.main .leftSec .recommended{
+    padding-bottom:25px;
+}
+
+.main .leftSec .cast h2,.main .leftSec .recommended h2{
+    font-size:18px;
+    font-weight:450;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.main .leftSec .cast .list,.main .leftSec .media .in .list,.main .leftSec .recommended .list{
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin-top:20px;
+    width: 100%;
+    padding-bottom:20px;
+}
+
+.main .leftSec .cast .list .sec,.main .leftSec .media .in .list .sec,.main .leftSec .recommended .list .sec{
+    margin-left:25px;
+}
+
+.main .leftSec .cast .list .sec img{
+    width:17vh;
+    height:20vh;
+    cursor: pointer;
+}
+
+.main .leftSec .cast .list h2{
+    font-size:13px;
+    font-weight:500;
+}
+
+.main .leftSec .cast .list p{
+    font-weight:300;
+    font-size:12px;
+    margin-top:7px;
+}
+
+.main .leftSec .social,.main .leftSec .media{
+    margin-top:70px;
+    padding-bottom:25px;
+}
+
+.main .leftSec .social .head, .main .leftSec .media .head{
+    display: inline-flex;
+    align-items: center;
+}
+
+.main .leftSec .social .head h2,.main .leftSec .media .head h2{
+    font-size:18px;
+    font-weight:450;
+}
+
+.main .leftSec .social .head ul,.main .leftSec .media .head ul{
+    margin-left:30px;
+}
+
+.main .leftSec .social .head ul li,.main .leftSec .media .head ul li{
+    font-size:15px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right:20px;
+}
+
+.main .leftSec .social .head ul li.active,.main .leftSec .media .head ul li.active{
+    border-bottom:3px solid darkred;
+}
+
+.main .leftSec .social .in{
+    margin-top:20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding:15px 25px;
+}
+
+.main .leftSec .social .in .user{
+    display: inline-flex;
+    align-items: center;
+}
+
+.main .leftSec .social .in .user .profile_img{
+    width:44px;
+    height:44px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.main .leftSec .social .in .user .profile_img img{
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+
+.main .leftSec .social .in .user .info{
+    margin-left:30px;
+}
+
+.main .leftSec .social .in .user .info h2{
+    font-size:17px;
+    font-weight:500;
+    margin-bottom:5px;
+}
+
+.main .leftSec .social .in .user .info p{
+    font-size:13px;
+    font-weight:300;
+    color:#d9d9d9;
+    line-height:1.8
+}
+
+.main .leftSec .social .in .user .info p span{
+    text-transform:capitalize;
+}
+
+.main .leftSec .social .in .desc{
+    margin-top:20px;
+    font-size:14px;
+    cursor: pointer;
+    line-height:1.6;
+}
+
+.main .leftSec .social .in .desc:hover{
+    text-shadow: 2px 2px #8b8a8a;
+
+}
+
+.main .leftSec .media .in{
+    margin-top:20px;
+}
+
+.main .leftSec .media .in .list .posters img{
+    width:20vh;
+}
+
+.main .leftSec .media .in .list .sec{
+    margin-right:0;
+    margin-left:0;
+}
+
+.main .leftSec .media .in .list .sec video{
+    width:50vh;
+    height:30vh;
+}
+
+.main .leftSec .media .in .list .sec img{
+    width:50vh;
+    height:30vh;
+}
+
+.main .leftSec .recommended{
+    border-bottom: none;
+    margin-top:70px
+}
+
+.main .leftSec .recommended .list .sec{
+    margin:0;
+    margin-right:20px;
+}
+
+.main .leftSec .recommended .list .sec img{
+    width:30vh;
+    height:30vh;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.main .leftSec .recommended .list .sec h4{
+    margin-top:7px;
+    font-size:14px;
+    font-weight:400;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.main .rightSec{
+    margin-left:70px;
+}
+
+@media(max-width:1120px){
+    .main{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main .leftSec{
+        width:100%;
+        order: 2;
+    }
+
+    .main .leftSec .cast{
+        display: none;
+    }
+    .main .leftSec .social .head ul li,.main .leftSec .media .head ul li{
+        margin-right:10px;
+        font-size:14px;
+    }
+
+}

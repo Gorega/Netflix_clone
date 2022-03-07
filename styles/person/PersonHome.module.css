@@ -1,0 +1,14 @@
+.main{
+    display: inline-flex;
+    padding:100px 40px;
+    background-color: #181818;
+    color:white;
+    overflow: hidden;
+    width: 100%;
+}
+
+@media(max-width:1400px){
+    .main{
+        display: block;
+    }
+}

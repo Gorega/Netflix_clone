@@ -1,0 +1,129 @@
+.login{
+    background-image: url("../../public/img/main-backdrop.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:100%;
+    height:100vh;
+    color:white;
+    position: relative;
+}
+
+.login .overlay{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,.7);
+}
+
+.login .head{
+    padding:25px 40px;
+    position: relative;
+    z-index: 5;
+}
+
+.login .head img{
+    width:20vh;
+    height:40px;
+}
+
+.login .body{
+    background-color: black;
+    width:42vh;
+    height:60vh;
+    padding:30px 20px;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.login .body h2{
+    font-size:27px;
+    font-weight:500;
+}
+
+.login .body form{
+    margin-top:20px;
+}
+
+.login .body form .error{
+    background-color: #E87C03;
+    color:white;
+    padding:10px 8px;
+    line-height: 1.5;
+    border-radius: 5px;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.login .body form .inputBox{
+    margin-bottom:15px;
+    width:100%;
+    height:45px;
+}
+
+.login .body form .inputBox input{
+    width:100%;
+    height:100%;
+    background-color:#333333;
+    color:white;
+    border:none;
+    padding-left:5px;
+}
+
+.login .body form .inputBox input.error{
+    border-bottom: 2px solid #E87C03;
+}
+
+.login .body form .inputBox input:focus{
+    outline: none;
+}
+
+.login .body form button{
+    background-color: darkred;
+    padding:13px 20px;
+    width:100%;
+    border:none;
+    color:white;
+    cursor: pointer;
+    margin-top:20px;
+    border-radius: 5px;;
+}
+
+.login .body .in{
+    margin-top:7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login .body .in .remember,.login .body .in .help{
+    font-size:13px;
+    color:#d9d9d9;
+    font-weight:300;
+}
+
+.login .body .in .help{
+    cursor: pointer;
+}
+
+.login .body .in .remember label{
+    margin-left:5px;
+}
+
+.login .body .new{
+    margin-top:50px;
+}
+
+.login .body .new h4{
+    font-size:14px;
+    color:#d9d9d9;
+    font-weight:450px;
+}
+
+.login .body .new h4 span{
+    color:white;
+    cursor: pointer;
+}

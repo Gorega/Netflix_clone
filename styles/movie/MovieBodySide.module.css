@@ -1,0 +1,45 @@
+.side{
+    width:100%
+}
+
+.side .social{
+    margin-bottom:50px;
+}
+
+.side .social ul li{
+    display: inline-block;
+    margin-right:20px;
+    font-size:30px;
+    cursor: pointer;
+}
+
+.side .details .sec{
+    margin-bottom:40px;
+}
+
+.side .details .sec h3{
+    font-size:15px;
+    font-weight:500;
+}
+
+.side .details .sec p{
+    font-size:14px;
+    font-weight:300;
+    margin-top:-7px;
+    color:#d9d9d9
+}
+
+.side .details .sec ul{
+    position: relative;
+    left:-45px;
+}
+
+.side .details .sec ul li{
+    display: inline-block;
+    margin:5px 7px;
+    border: 1px solid #d9d9d9;
+    padding:5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size:13px;
+}
