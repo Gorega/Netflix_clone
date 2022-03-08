@@ -5,6 +5,7 @@ import { AppContext } from "../../ContextApi";
 import styles from "../../styles/watchlist/BodySec.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import {server} from "../../lib/server";
 
 function BodySec({watchlist,searchValue,removeMovie}){
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
@@ -12,7 +13,7 @@ function BodySec({watchlist,searchValue,removeMovie}){
     const {user} = useContext(AppContext);
 
     const deleteMovieHandler =(movieId)=>{
-        axios.patch(`http://localhost:3000/api/watchlist/delete-from-watchlist/${user.name}`,{movieId})
+        axios.patch(`${server}/api/watchlist/delete-from-watchlist/${user.name}`,{movieId})
         .then(res => router.reload())
         .catch(err => console.log(err));
     }

@@ -4,9 +4,10 @@ import Trailer from "./Trailer";
 import styles from "../../styles/movie/Header.module.css";
 import {useState,useContext, useEffect} from "react"; 
 import Nav from "../Nav";
-import { AppContext } from "../../ContextApi";
-import axios from "axios";
 import { useRouter } from "next/router";
+import { AppContext } from "../../ContextApi";
+import {server} from "../../lib/server"
+import axios from "axios";
 
 function Header({movie,credits,trailer}){
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
@@ -19,7 +20,7 @@ function Header({movie,credits,trailer}){
     const router = useRouter();
 
     const addToWatchListHandler = ()=>{
-        axios.post(`http://localhost:3000/api/watchlist/add-to-watchlist/${user.name}`,{list:{
+        axios.post(`${server}/api/watchlist/add-to-watchlist/${user.name}`,{list:{
             id:movie.id,
             poster:movie.poster_path,
             title:movie.title || movie.name,

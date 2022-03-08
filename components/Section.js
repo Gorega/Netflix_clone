@@ -53,10 +53,10 @@ return <div className={styles.section}>
             <h2>{movie.title || movie.name}</h2>
             </div>
         }) : <div style={{fontSize:13,marginLeft:10}}>No movies to show ....</div>}
-    {showControl && <div className={styles.control}>
-            <span onClick={scrollLeft}><FontAwesomeIcon icon={faAngleLeft} /></span>
-            <span onClick={scrollRight}><FontAwesomeIcon icon={faAngleRight} /></span>
-    </div>}
+        {showControl && <div className={styles.control}>
+                <span onClick={scrollLeft}><FontAwesomeIcon icon={faAngleLeft} /></span>
+                <span onClick={scrollRight}><FontAwesomeIcon icon={faAngleRight} /></span>
+        </div>}
     </div>
 </div>
 

@@ -2,6 +2,7 @@ import {firebaseApp} from "../../lib/firebaseInit";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import {server} from "../../lib/server";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 import Layout from "./layout";
 
@@ -77,7 +78,7 @@ function CreateProfile(){
     }
 
     const createProfileHandler = ()=>{
-        axios.post("http://localhost:3000/api/profile/create-user",{name:profileName,image:imageFile})
+        axios.post(`${server}/api/profile/create-user`,{name:profileName,image:imageFile})
         .then(res => {
             router.replace("/profile")
         })
