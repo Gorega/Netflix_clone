@@ -12,9 +12,9 @@ return <div className={styles.side}>
     
     <div className={styles.social}>
         <ul>
-            <a href={`https://facebook.com/${social.facebook_id}`} target="_blank"><li><FontAwesomeIcon icon={faFacebook} /></li></a>
-            <a href={`https://twitter.com/${social.twitter_id}`} target="_blank"><li><FontAwesomeIcon icon={faTwitter} /></li></a>
-            <a href={`https://instagram.com/${social.instagram_id}`} target="_blank"><li><FontAwesomeIcon icon={faInstagram} /></li></a>
+            <a href={`https://facebook.com/${social.facebook_id}`} rel="noreferrer" target="_blank"><li><FontAwesomeIcon icon={faFacebook} /></li></a>
+            <a href={`https://twitter.com/${social.twitter_id}`} rel="noreferrer" target="_blank"><li><FontAwesomeIcon icon={faTwitter} /></li></a>
+            <a href={`https://instagram.com/${social.instagram_id}`} rel="noreferrer" target="_blank"><li><FontAwesomeIcon icon={faInstagram} /></li></a>
         </ul>
     </div>
 
