@@ -50,8 +50,8 @@ return <>
         <div className={styles.info}>
             <h2>{movie.title || movie.name}</h2> <span>({movie.release_date?.substring(0,4) || movie.first_air_date?.substring(0,4)})</span>
 
-            <p>{movie.release_date || movie.first_air_date} ({movie.production_countries[0] && movie.production_countries[0].iso_3166_1}) . {movie.genres.map((genre)=>{
-                return <div className={styles.genre}>{genre.name}</div>
+            <p>{movie.release_date || movie.first_air_date} ({movie.production_countries[0] && movie.production_countries[0].iso_3166_1}) . {movie.genres.map((genre,index)=>{
+                return <div className={styles.genre} key={index}>{genre.name}</div>
             })} . {movie.duration}</p>
 
             <div className={styles.control}>
