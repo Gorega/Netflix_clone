@@ -20,9 +20,7 @@ export default function Home({poster,moviesList,tvLists,playingNow}) {
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req : context.req})
-
     if(!session){
       return {
         redirect:{
@@ -51,7 +49,7 @@ export async function getServerSideProps(context){
       playingNow:data,
       moviesList:moviesList,
       tvLists:tvLists,
-      session:session
+      session
     }
   }
 }

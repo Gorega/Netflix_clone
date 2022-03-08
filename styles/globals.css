@@ -26,3 +26,25 @@ a {
   background-color: #d9d9d9;
   border-radius: 25px;
 }
+
+.not-found{
+  background-color: #181818;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height:100vh;
+  text-align: center;
+}
+
+.not-found button{
+  background-color: darkred;
+  color:white;
+  padding:12px 40px;
+  cursor: pointer;
+  border: none;
+  font-size:14px;
+  font-weight: 300;
+  margin-top:15px;
+}

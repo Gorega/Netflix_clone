@@ -20,9 +20,7 @@ return <>
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req:context.req})
-
     if(!session){
         return{
             redirect:{
@@ -49,7 +47,7 @@ export async function getServerSideProps(context){
             tvShows:data,
             popularTv:popularTvData,
             topRatedTv:topRatedTvData,
-            session:session
+            session
         }
     }
 }

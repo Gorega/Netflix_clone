@@ -14,12 +14,10 @@ function Nav(){
     const {user,setShowSideBar} = useContext(AppContext);
     const [sugg,setSugg] = useState([]);
     const [searchValue,setSearchValue] = useState(null);
-    const MDB_URL = "http://api.themoviedb.org/3"
-    const api_key = "be027be57471a5c67b6018f8805cdba2";
 
     const searchFilter = (e)=>{
         setSearchValue(e.target.value)
-        axios.get(`${MDB_URL}/search/movie?api_key=${api_key}&query=${searchValue}`)
+        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/search/movie?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}&query=${searchValue}`)
         .then(res => setSugg(res.data.results))
         .catch(err => console.log(err));
     }

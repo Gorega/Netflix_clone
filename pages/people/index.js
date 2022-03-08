@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Nav from "../../components/Nav";
 import PersonCard from "../../components/person/personCard";
 import { requests } from "../../lib/requests";
 import styles from "../../styles/People.module.css";
-import {getSession} from "next-auth/react";
+import {getSession} from "next-auth/react"
 
 function People({people}){
     const [currentPage,setCurrentPage] = useState(1);
@@ -18,17 +18,12 @@ function People({people}){
 
     const changePageHandler = async (currentPage)=>{
         setCurrentPage(currentPage)
-        const MDB_URL = "http://api.themoviedb.org/3"
-        const api_key = "be027be57471a5c67b6018f8805cdba2";
         setLoading(true)
-        const response = await axios.get(`${MDB_URL}/person/popular?api_key=${api_key}&page=${currentPage}`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/person/popular?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}&page=${currentPage}`);
         const data = await response.data.results;
         setLoading(false)
         setPeopleData(data);
     }
-
-    useEffect(()=>{
-    },[currentPage])
 
 return <>
 <Nav />
@@ -54,9 +49,7 @@ return <>
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req:context.req})
-
     if(!session){
         return{
             redirect:{
@@ -65,14 +58,12 @@ export async function getServerSideProps(context){
             }
         }
     }
-
     const response = await axios.get(requests.fetchPeople);
     const data = await response.data.results;
 
     return{
         props:{
             people:data,
-            session
         }
     }
 }

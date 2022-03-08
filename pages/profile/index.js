@@ -1,6 +1,7 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
-import ProfileFace from "../../components/profile/ProfileFace"; 
+import ProfileFace from "../../components/profile/ProfileFace";
+import {server} from "../../lib/server"; 
 
 function UserPage({profiles}){
 return <ProfileFace profiles={profiles} />
@@ -18,12 +19,12 @@ export async function getServerSideProps(context){
         }
     }
 
-    const response = await axios.get(`http://localhost:3000/api/profile/user-data`,{ headers: { cookie: context.req.headers.cookie } });
+    const response = await axios.get(`${server}/api/profile/user-data`,{ headers: { cookie: context.req.headers.cookie } });
     const data = await response.data;
     return{
         props:{
             profiles:data.user.profiles,
-            session:session
+            session
         }
     }
 }

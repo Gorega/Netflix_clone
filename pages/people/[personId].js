@@ -7,9 +7,7 @@ return <PersonHome person={{...person}} credits={{...credits}} social={{...socia
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req:context.req})
-
     if(!session){
         return{
             redirect:{
@@ -19,8 +17,8 @@ export async function getServerSideProps(context){
         }
     }
 
-    const MDB_URL = "http://api.themoviedb.org/3"
-    const api_key = "be027be57471a5c67b6018f8805cdba2";
+    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL
+    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const {personId} = context.params;
     const personRes = await axios.get(`${MDB_URL}/person/${personId}?api_key=${api_key}`);
     const personData = await personRes.data;

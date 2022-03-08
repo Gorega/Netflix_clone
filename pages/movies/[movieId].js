@@ -3,21 +3,23 @@ import Header from "../../components/movie/Header";
 import axios from "axios";
 import MovieBody from "../../components/movie/movieBody";
 import {getSession} from "next-auth/react"
-import { useRouter } from "next/router";
 
 function Movie({movie,credits,reviews,media,videos,recommendations,keywords,socialLinks}){
-    const router = useRouter();
-    if(router.isFallback){
-        return <div className={styles.error}>
-            Not found
-        </div>
-    }
 
 return <div className={styles.movie}>
-    <Header movie={{...movie}} credits={credits} trailer={{...videos}}
+    <Header movie={{...movie}}
+            credits={credits}
+            trailer={{...videos}}
     />
-    <MovieBody credits={credits} reviews={reviews[0]} media={media} recommendation={recommendations} movie={{...movie}}
-                 keywords={keywords} videos={videos} social={{...socialLinks}} route={"movies"}
+    <MovieBody credits={credits}
+                reviews={reviews[0]}
+                media={media}
+                recommendation={recommendations}
+                movie={{...movie}}
+                keywords={keywords}
+                videos={videos}
+                social={{...socialLinks}}
+                route={"movies"}
     />
 
 </div>
@@ -25,9 +27,7 @@ return <div className={styles.movie}>
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req:context.req})
-
     if(!session){
         return{
             redirect:{
@@ -37,9 +37,18 @@ export async function getServerSideProps(context){
         }
     }
 
-    const MDB_URL = "http://api.themoviedb.org/3"
-    const api_key = "be027be57471a5c67b6018f8805cdba2";
+    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const {movieId} = context.params
+
+    if(!movieId){
+        return{
+            redirect:{
+                destination:"/dashboard"
+            }
+        }
+    }
+
     const response = await axios.get(`${MDB_URL}/movie/${movieId}?api_key=${api_key}`);
     const data = await response.data;
 
@@ -82,7 +91,7 @@ export async function getServerSideProps(context){
             keywords:keywordsData,
             videos:videosData,
             socialLinks:socialData,
-            session:session
+            session
         }
     }
 }

@@ -5,6 +5,7 @@ import { useState } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner,faCheck } from '@fortawesome/free-solid-svg-icons'
+import {server} from "../../lib/server";
 
 function Register(){
     const router = useRouter();
@@ -17,7 +18,7 @@ function Register(){
     const registerHandler = (e)=>{
         e.preventDefault();
         setLoading(true)
-        axios.post(`http://localhost:3000/api/auth/register`,{email:emailValue,password:passValue})
+        axios.post(`${server}/api/auth/register`,{email:emailValue,password:passValue})
         .then(res => {
             setLoading(false)
             setSuccessStatus(true)

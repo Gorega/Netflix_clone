@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import {useState } from "react";
 import Poster from "../../components/Poster";
 import Section from "../../components/Section";
 import Nav from "../../components/Nav";
@@ -17,13 +17,11 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
     const [Movies,setMovies] = useState(selectedMovies);
     const [popular,setPopular] = useState(popularMovies);
     const [topRated,setTopRated] = useState(topRatedMovies);
-    const MDB_URL = "http://api.themoviedb.org/3"
-    const api_key = "be027be57471a5c67b6018f8805cdba2";
 
 
     const getMoviePoster = (e)=>{
         setSelectValue(e.target.value);
-        axios.get(`${MDB_URL}/discover/movie?with_genres=${e.target.value}&api_key=${api_key}`)
+        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/discover/movie?with_genres=${e.target.value}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`)
         .then(res => {
             const randomMovie = res.data.results[Math.floor(Math.random() * res.data.results.length - 1)]
             setTitle(randomMovie.title)
@@ -64,9 +62,7 @@ return <>
 
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req:context.req})
-
     if(!session){
         return{
             redirect:{

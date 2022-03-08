@@ -4,6 +4,7 @@ import { useState } from "react";
 import Layout from "../../components/profile/Layout";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 import { useRouter } from "next/router";
+import {server} from "../../lib/server"
 
 function EditProfile({profile}){
     const router = useRouter();
@@ -76,7 +77,7 @@ function EditProfile({profile}){
     }
 
     const updateProfileHandler = ()=>{
-        axios.patch(`http://localhost:3000/api/profile/update-user/${profile.name}`,{name:profileName,image:imageFile})
+        axios.patch(`${server}/api/profile/update-user/${profile.name}`,{name:profileName,image:imageFile})
         .then(res=> router.replace("/profile"))
         .catch(error => console.log(err));
     }

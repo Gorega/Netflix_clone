@@ -1,24 +1,26 @@
 import Login from "../../components/preLogin/Login";
-import {getSession} from "next-auth/react";
-import { useEffect, useState } from "react";
+import {useSession} from "next-auth/react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 
 function LoginPage(){
     const router = useRouter();
     const [loading,setLoading] = useState(true);
-    useEffect(()=>{
-        getSession().then(session =>{
-            if(session){
-                router.replace('/dashboard');
-            }else{
-                setLoading(false)
-            }
-        })
-    },[router])
+    const {status} = useSession({
+        required:true,
+        onUnauthenticated(){
+            setLoading(false)
+        }
+    });
+    
+    if(status === "authenticated"){
+        router.replace("/dashboard")
+    }
 
     if(loading){
         return <div>...loading</div>
     }
+
 return <Login />
 
 }

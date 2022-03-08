@@ -3,12 +3,13 @@ import { faPlus,faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
 import styles from "../../styles/profile/ProfileFace.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {server} from "../../lib/server";
 
 function ProfileFace({profiles}){
     const router = useRouter();
 
     const deleteProfileHandler = (profileName)=>{
-        axios.patch(`http://localhost:3000/api/profile/delete-user/${profileName}`)
+        axios.patch(`${server}/api/profile/delete-user/${profileName}`)
         .then(res => window.location.reload())
         .catch(err => console.log(err))
     }

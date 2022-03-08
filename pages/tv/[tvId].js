@@ -8,8 +8,15 @@ function Movie({movie,credits,reviews,media,videos,recommendations,keywords,soci
 return <div className={styles.movie}>
     <Header movie={{...movie}} credits={credits} trailer={{...videos}}
     />
-    <MovieBody credits={credits} reviews={reviews[0]} media={media} recommendation={recommendations} movie={{...movie}}
-                keywords={keywords} videos={videos} social={{...socialLinks}} route={"tv"}
+    <MovieBody credits={credits}
+            reviews={reviews[0]}
+            media={media}
+            recommendation={recommendations}
+            movie={{...movie}}
+            keywords={keywords}
+            videos={videos}
+            social={{...socialLinks}}
+            route={"tv"}
     />
 
 </div>
@@ -17,7 +24,6 @@ return <div className={styles.movie}>
 }
 
 export async function getServerSideProps(context){
-
     const session = await getSession({req:context.req})
     if(!session){
         return{
@@ -28,8 +34,8 @@ export async function getServerSideProps(context){
         }
     }
 
-    const MDB_URL = "http://api.themoviedb.org/3"
-    const api_key = "be027be57471a5c67b6018f8805cdba2";
+    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL
+    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const {tvId} = context.params
     const response = await axios.get(`${MDB_URL}/tv/${tvId}?api_key=${api_key}`);
     const data = await response.data;

@@ -6,6 +6,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {server} from "../../lib/server";
 
 function watchlistPage(){
     const [loading,setLoading] = useState(false);
@@ -20,7 +21,7 @@ function watchlistPage(){
         const user = JSON.parse(localStorage.getItem("user"));
         const fetchWatchList = async ()=>{
             setLoading(true)
-            const response = await axios.get(`http://localhost:3000/api/watchlist/user-watchlist/${user.name}`);
+            const response = await axios.get(`${server}/api/watchlist/user-watchlist/${user.name}`);
             const data = await response.data.list[0].watchList;
             setWatchList(data)
             setLoading(false)
