@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import {server} from "../../lib/server";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
-import Layout from "./layout";
+import Layout from "./Layout";
 
 function CreateProfile(){
     const router = useRouter();
