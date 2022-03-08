@@ -1,7 +1,7 @@
 import {firebaseApp} from "../../lib/firebaseInit";
 import axios from "axios";
 import { useState } from "react";
-import Layout from "../../components/profile/Layout";
+import Layout from "./Layout";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL,deleteObject } from "firebase/storage";
 import { useRouter } from "next/router";
 import {server} from "../../lib/server"
