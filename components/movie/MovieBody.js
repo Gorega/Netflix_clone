@@ -49,7 +49,7 @@ return <div className={styles.main}>
                 <div className={styles.desc} onClick={()=> setShowReviewContent(!showReviewContent)}>
                     {showReviewContent ? reviews.content : `${reviews.content.substring(0,650)} ...`}
                 </div>
-            </div> : <div className={styles.in}>We don't have any reviews for. Would you like to write one?</div> : ""}
+            </div> : <div className={styles.in}>We dont have any reviews for {movie.title}. Would you like to write one?</div> : ""}
         </div>
 
         <div className={styles.media}>
