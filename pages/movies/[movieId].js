@@ -1,7 +1,7 @@
 import styles from "../../styles/movie/Movie.module.css";
 import Header from "../../components/movie/Header";
 import axios from "axios";
-import MovieBody from "../../components/movie/movieBody";
+import MovieBody from "../../components/movie/MovieBody";
 import {getSession} from "next-auth/react"
 
 function Movie({movie,credits,reviews,media,videos,recommendations,keywords,socialLinks}){

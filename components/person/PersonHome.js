@@ -1,6 +1,6 @@
 import styles from "../../styles/person/PersonHome.module.css";
 import Nav from "../Nav";
-import MainSection from "./mainSection";
+import MainSection from "./MainSection";
 import SideSection from "./SideSection";
 
 function PersonHome({person,credits,social}){
