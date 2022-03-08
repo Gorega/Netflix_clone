@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import {server} from "../../lib/server";
 
-function watchlistPage(){
+function WatchlistPage(){
     const [loading,setLoading] = useState(false);
     const [searchValue,setSearchValue] = useState("");
     const [watchList,setWatchList] = useState([]);
@@ -46,4 +46,4 @@ return <>
 
 }
 
-export default watchlistPage;
+export default WatchlistPage;
