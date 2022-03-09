@@ -58,7 +58,7 @@ return <div className={styles.login}>
                     <label>Remember me</label>
                 </div>
                 <div className={styles.help}>
-                    Need help?
+                    Need Help?
                 </div>
             </div>
         </form>
