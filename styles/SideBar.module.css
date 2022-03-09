@@ -116,12 +116,14 @@
     }
 
     .sideBar .content{
+        padding:40px;
         left:0;
         width:100%;
     }
 
     .sideBar .content .list ul li{
         font-size:18px;
+        margin-bottom:30px;
     }
 
     .sideBar .content .end{
