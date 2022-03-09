@@ -1,6 +1,5 @@
-import axios from "axios";
 import { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styles from "../../styles/movie/MovieBody.module.css";
 import MovieBodySide from "./MovieBodySide";
 

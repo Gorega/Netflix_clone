@@ -111,12 +111,25 @@
 }
 
 @media(max-width:768px) {
+    .sideBar .content .head{
+        margin-bottom:20px;
+    }
+
     .sideBar .content{
         left:0;
         width:100%;
     }
 
     .sideBar .content .list ul li{
-        font-size:20px;
+        font-size:18px;
+    }
+
+    .sideBar .content .end{
+        margin-top:0
+    }
+
+    .sideBar .content .end ul li{
+        font-size:13px;
+        margin-bottom:12px;
     }
 }

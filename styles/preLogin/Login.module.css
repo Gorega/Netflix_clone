@@ -31,7 +31,7 @@
 .login .body{
     background-color: black;
     width:42vh;
-    height:60vh;
+    height:fit-content;
     padding:30px 20px;
     position: absolute;
     top:50%;

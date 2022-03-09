@@ -115,6 +115,21 @@
     position: relative;
 }
 
+@media(max-width:768px){
+    .main .body form{
+        display: block;
+    }
+    .main .body form input{
+        width: 100%;
+        margin-bottom:10px;
+        font-size:12px;
+    }
+
+    .main .body form button{
+        font-size: 13px !important; 
+    }
+}
+
 @media(max-width:1200px){
     .main .body{
         width:100%;
