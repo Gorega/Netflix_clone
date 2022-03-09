@@ -21,6 +21,7 @@
     padding:25px 40px;
     position: relative;
     z-index: 5;
+    margin-bottom:40px;
 }
 
 .login .head img{
