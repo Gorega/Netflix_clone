@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router";
+import {server} from "../../lib/server"
+import axios from "axios";
 
 function Control({user}){
 
