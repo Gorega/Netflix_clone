@@ -1,20 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus,faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import styles from "../../styles/profile/ProfileFace.module.css";
 import { useRouter } from "next/router";
-import axios from "axios";
-import {server} from "../../lib/server";
+import ProfileControl from "./ProfileControl";
 import { useState,useEffect } from "react";
 
 function ProfileFace({profiles}){
     const router = useRouter();
     const [error,setError] = useState({status:false,msg:""})
-
-    const deleteProfileHandler = (profileName)=>{
-        axios.patch(`${server}/api/profile/delete-user/${profileName}`)
-        .then(res => window.location.reload())
-        .catch(err => console.log(err))
-    }
 
     useEffect(()=>{
         const timer = setTimeout(()=>{
@@ -51,12 +44,7 @@ return <div className={styles.users}>
                 localStorage.setItem("user",JSON.stringify(user))
                 window.location.href = "/dashboard"
             }}>{user.name}</h3>
-            <div className={styles.control}>
-                <ul>
-                    <li onClick={()=> deleteProfileHandler(user.name)}><FontAwesomeIcon icon={faTrash} /></li>
-                    <li onClick={()=> router.push(`/profile/edit/${user.name}`)}><FontAwesomeIcon icon={faEdit} /></li>
-                </ul>
-            </div>
+            <ProfileControl user={{...user}} />
             </div>
         })}
     </div>
