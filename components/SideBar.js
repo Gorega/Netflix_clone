@@ -32,10 +32,10 @@ return <div className={`${styles.sideBar} ${showSideBar && styles.show}`}>
     <div className={styles.content}>
         <div className={styles.head}>
             <div className={styles.profileImg}>
-                <img src={user.image} alt="" />
+                <img src={user ? user.image : ""} alt="" />
             </div>
             <div className={styles.info}>
-                <h3>{user.name}</h3>
+                <h3>{user ? user.name : ""}</h3>
                 <span onClick={()=> router.push("/profile")}>Switch Profiles</span>
             </div>
         </div>

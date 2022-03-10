@@ -1,12 +1,16 @@
 import { faFacebook, faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import ImageExpand from "./ImageExpand";
 import styles from "../../styles/person/SideSection.module.css";
 
 function SideSection({person,credits,social}){
+    const [showExpandImage,setShowExpandImage] = useState(false)
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
 
-return <div className={styles.side}>
-    <div className={styles.image}>
+return <>
+<div className={styles.side}>
+    <div className={styles.image} onClick={()=> setShowExpandImage(true)}>
         <img src={`${baseImgaeUrl}/${person.profile_path}`} alt="" />
     </div>
     
@@ -50,6 +54,8 @@ return <div className={styles.side}>
         </div>
     </div>
 </div>
+{showExpandImage && <ImageExpand person={person} closeImageExpand={()=> setShowExpandImage(false)} />}
+</>
 
 }
 

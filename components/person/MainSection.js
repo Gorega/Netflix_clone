@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../../styles/person/MainSection.module.css";
 
 function MainSection({person,credits}){
@@ -14,10 +14,6 @@ function MainSection({person,credits}){
         const filter = credits.cast.filter((credit)=> credit.media_type === e.target.value);
         setFilteredCredits(filter)
     }
-
-    useEffect(()=>{
-
-    },[selectFilterValue])
 
 return <div className={styles.main}>
     <h2>{person.name}</h2>

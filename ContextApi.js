@@ -4,7 +4,11 @@ export const AppContext = React.createContext();
 
 const AppProvider = (props)=>{
     const [showSideBar,setShowSideBar] = useState(false);
-    const [user,setUser] = useState([]);
+    const [user,setUser] = useState({
+        image:"",
+        name:"",
+        watchList:[]
+    });
 
     useEffect(()=>{
         const user = JSON.parse(window.localStorage.getItem("user"))

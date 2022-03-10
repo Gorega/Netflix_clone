@@ -92,6 +92,14 @@
         display:none
     }
 
+    .side .image{
+        pointer-events: none;
+    }
+
+    .side .image::after{
+        display: none;
+    }
+
 }
 
 @media(min-width:770px) and (max-width:1400px){
@@ -102,5 +110,10 @@
 
     .side .image{
         width:30vh;
+        pointer-events: none;
+    }
+
+    .side .image::after{
+        display: none;
     }
 }
