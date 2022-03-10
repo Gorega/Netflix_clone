@@ -77,14 +77,28 @@
     transform: translateX(-50%);
     color:#d9d9d9;
 }
-.main .body .control input{
+
+.main .body .control .formControl{
     margin-left:20px;
+}
+
+.main .body .control input{
     height:40px;
     width:350px;
     padding-left:5px;
     color:white;
     background-color:transparent;
     border: 1px solid #7f7f7f;
+}
+
+.main .body .control .error{
+    margin-left:5px;
+    display: block;
+    margin-top:15px;
+    color:#E87C03;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.5;
 }
 
 .main .body .control input:focus{

@@ -11,6 +11,7 @@ function CreateProfile(){
     const defaultProfileImage = `https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png`;
     const [profileName,setProfileName] = useState(null);
     const [imageFile,setImageFile] = useState(defaultProfileImage);
+    const [error,setError] = useState({status:false,msg:""});
 
     const uploadProfileImage = (e)=>{
             const storage = getStorage();
@@ -78,11 +79,14 @@ function CreateProfile(){
     }
 
     const createProfileHandler = ()=>{
+        setError({status:false})
         axios.post(`${server}/api/profile/create-user`,{name:profileName,image:imageFile})
         .then(res => {
             router.replace("/profile")
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            setError({status:true,msg:err.response.data.msg})
+        });
     }
     
 return <Layout
@@ -95,6 +99,7 @@ return <Layout
     cancelHandler={cancelHandler}
     namePlaceholder="Name"
     profileName={profileName}
+    error={error}
 />
 
 }

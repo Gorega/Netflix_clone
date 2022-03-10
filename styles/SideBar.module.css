@@ -23,6 +23,7 @@
     width:450px;
     height:100%;
     padding:50px;
+    overflow:auto;
 }
 
 .sideBar .content .head{
@@ -121,6 +122,22 @@
         width:100%;
     }
 
+    .sideBar .content .list ul li{
+        font-size:18px;
+        margin-bottom:30px;
+    }
+
+    .sideBar .content .end{
+        margin-top:0
+    }
+
+    .sideBar .content .end ul li{
+        font-size:14px;
+        margin-bottom:15px;
+    }
+}
+
+@media(min-width:768px) and (max-width:1200px){
     .sideBar .content .list ul li{
         font-size:18px;
         margin-bottom:30px;

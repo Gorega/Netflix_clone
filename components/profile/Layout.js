@@ -1,6 +1,6 @@
 import styles from "../../styles/profile/Layout.module.css";
 
-function Layout({title,text,imageFile,uploadProfileImage,setProfileName,createProfileHandler,cancelHandler,profileName,namePlaceholder}){
+function Layout({title,text,imageFile,uploadProfileImage,setProfileName,createProfileHandler,cancelHandler,profileName,namePlaceholder,error}){
 return <div className={styles.main}>
 <div className={styles.body}>
     <h2>{title}</h2>
@@ -14,7 +14,10 @@ return <div className={styles.main}>
                 <input type="file" id="upload" style={{display:"none"}} onChange={uploadProfileImage} />
             </div>
         </div>
-        <input type="text" placeholder={namePlaceholder} value={profileName} onChange={setProfileName} />
+        <div className={styles.formControl}>
+            <input type="text" placeholder={namePlaceholder} value={profileName} onChange={setProfileName} />
+            {error.status && <div className={styles.error}>{error.msg}</div>}
+        </div>
     </div>
 
     <div className={styles.submit}>

@@ -3,7 +3,7 @@
     background-size:cover;
     position: relative;
     height:auto;
-    min-height: 100vh;
+    min-height: 80vh;
     width:100%;
     color:white;
 }
@@ -18,19 +18,18 @@
 }
 
 .header .content{
-    position: relative;
+    position:inherit;
     z-index: 5;
     display: flex;
-    height:fit-content;
-    padding:40px 0;
+    padding:40px 20px;
     top:35px;
 }
 
 .header .content .poster{
     position: relative;
-    width:45vh;
+    width:50vh;
     min-width:45vh;
-    height:100%;
+    height:min-content;
 }
 
 .header .content .poster img{
@@ -76,6 +75,12 @@
 .header .content .info .control .score{
     display: inline-flex;
     align-items: center;
+    transition: .3s all ease-in-out;
+    cursor: default;
+}
+
+.header .content .info .control .score:hover{
+    transform: scale(1.04);
 }
 
 .header .content .info .control .score h5{
@@ -124,10 +129,6 @@
     color:black;
 }
 
-.header .content .info .control ul li svg.active{
-    color:red;
-}
-
 .header .content .info .control ul li .patch{
     position: absolute;
     background-color: black;
@@ -139,10 +140,21 @@
     right:-10px;
     width:max-content;
     display: none;
+    line-height: 1.6;
 }
 
 .header .content .info .control ul li:hover .patch{
-    display: block;
+    display: inline-flex;
+}
+
+.header .content .info .control ul li .rate{
+    background-color: white;
+    padding:20px;
+    width:200px;
+    height:50px;
+    display: inline-flex;
+    position: absolute;
+    top:50px;
 }
 
 .header .content .info .control .trailer{
@@ -274,5 +286,9 @@
 
     .header .content .info .control .score span{
         font-size:15px;
+    }
+
+    .header .content .info .control ul li .patch{
+        left:-10px;
     }
 }

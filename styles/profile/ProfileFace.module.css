@@ -79,6 +79,14 @@
     cursor: pointer;
 }
 
+.users .error{
+    text-align: center;
+    color:#E87C03;
+    font-weight: bold;
+    font-size:14px;
+    line-height: 1.6;
+}
+
 @media(max-width:1200px){
 
     .users h2{
@@ -117,5 +125,19 @@
 
     .users .list .sec .control ul li{
         margin-right:35px;
+    }
+
+    .users .error{
+        position: fixed;
+        width: 80%;
+        bottom:10px;
+        left:50%;
+        transform: translateX(-50%);
+        background-color: darkred;
+        padding:10px;
+        color:white;
+        font-size:12px;
+        text-align: center;
+        font-weight: bold;
     }
 }

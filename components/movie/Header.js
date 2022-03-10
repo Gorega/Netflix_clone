@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBookmark,faHeart,faStar,faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark,faHeart,faStar,faPlay,faSpinner } from '@fortawesome/free-solid-svg-icons'
 import Trailer from "./Trailer";
 import styles from "../../styles/movie/Header.module.css";
 import {useState,useContext, useEffect} from "react"; 
 import Nav from "../Nav";
-import { useRouter } from "next/router";
 import { AppContext } from "../../ContextApi";
 import {server} from "../../lib/server"
 import axios from "axios";
@@ -12,23 +11,32 @@ import axios from "axios";
 function Header({movie,credits,trailer}){
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const [showTrailer,setShowTrailer] = useState(false);
+    const [listedLoading,setListedLoading] = useState(false);
     const [listed,setListed] = useState({
         status:false,
-        msg:""
+        msg:"",
+        error:false
     })
     const {user} = useContext(AppContext);
-    const router = useRouter();
 
     const addToWatchListHandler = ()=>{
+        setListedLoading(true)
         axios.post(`${server}/api/watchlist/add-to-watchlist/${user.name}`,{list:{
             id:movie.id,
             poster:movie.poster_path,
             title:movie.title || movie.name,
             release_date:movie.release_date || movie.first_air_date,
-            score:movie.vote_average
+            score:movie.vote_average,
+            type:window.location.pathname.includes("movies") ? "movie" : "tv"
         }})
-        .then(res=> setListed({status:true,msg:"Added to WatchList"}))
-        .catch(err => console.log(err));
+        .then(res=> {
+            setListedLoading(false)
+            setListed({status:true,msg:"Added to WatchList"})
+        })
+        .catch(err => {
+            setListedLoading(false)
+            setListed({status:true,msg:"Failed to add, please try again",error:true})
+        });
     }
 
     useEffect(()=>{
@@ -38,7 +46,7 @@ function Header({movie,credits,trailer}){
         return(()=>{
             window.clearTimeout(timer)
         })
-    },[])
+    },[listed])
 
 return <>
 <Nav />
@@ -61,7 +69,7 @@ return <>
                 </div>
                 <ul>
                     <li onClick={addToWatchListHandler}>
-                        <FontAwesomeIcon icon={faBookmark} />
+                        {listedLoading ? <FontAwesomeIcon style={{marginLeft:-7,marginTop:-7}} className='fa-spin' icon={faSpinner} /> : <FontAwesomeIcon icon={faBookmark} />}
                         <div className={styles.patch}>
                             Add To WatchList
                         </div>
@@ -77,6 +85,8 @@ return <>
                         <div className={styles.patch}>
                             Rate
                         </div>
+                        {/* <div className={styles.rate}>
+                        </div> */}
                     </li>
                 </ul>
                 <div className={styles.trailer} onClick={()=> setShowTrailer(true)}>
@@ -98,7 +108,7 @@ return <>
             </div>
         </div>
     </div>
-    <div className={`${styles.notification} ${listed.status && styles.show}`}>{listed.msg}</div>
+    <div className={`${styles.notification} ${listed.status && styles.show}`} style={{backgroundColor:listed.error ? "darkred" : "green"}}>{listed.msg}</div>
     {showTrailer && <Trailer closeTrailer={()=> setShowTrailer(false)} trailerPath={trailer.key} posterPath={movie.poster_path} />}
 </div>
 </>

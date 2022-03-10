@@ -21,7 +21,12 @@ function SideBar(){
                 setShowSideBar(false)
             }
         })
-    },[])
+        if(showSideBar){
+            document.body.style.overflow = "hidden"
+        }else{
+            document.body.style.overflow = "auto"
+        }
+    },[showSideBar])
 
 return <div className={`${styles.sideBar} ${showSideBar && styles.show}`}>
     <div className={styles.content}>

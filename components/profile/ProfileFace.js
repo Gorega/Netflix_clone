@@ -4,9 +4,11 @@ import styles from "../../styles/profile/ProfileFace.module.css";
 import { useRouter } from "next/router";
 import axios from "axios";
 import {server} from "../../lib/server";
+import { useState,useEffect } from "react";
 
 function ProfileFace({profiles}){
     const router = useRouter();
+    const [error,setError] = useState({status:false,msg:""})
 
     const deleteProfileHandler = (profileName)=>{
         axios.patch(`${server}/api/profile/delete-user/${profileName}`)
@@ -14,11 +16,26 @@ function ProfileFace({profiles}){
         .catch(err => console.log(err))
     }
 
+    useEffect(()=>{
+        const timer = setTimeout(()=>{
+            setError({status:false})
+        },3000)
+        return(()=>{
+            window.clearTimeout(timer);
+        })
+    },[error])
+
     
 return <div className={styles.users}>
     <h2>Who Watching Netflix?</h2>
     <div className={styles.list}>
-        <div className={styles.sec} onClick={()=>router.push("/profile/create")}>
+        <div className={styles.sec} onClick={()=>{
+            if(profiles.length >= 4){
+                setError({status:true,msg:"You have reached the maximum profiles, you can't add more"})
+            }else{
+                router.push("/profile/create")
+            }
+        }}>
             <div className={styles.image}>
                 <FontAwesomeIcon icon={faPlus} />
             </div>
@@ -43,6 +60,7 @@ return <div className={styles.users}>
             </div>
         })}
     </div>
+    {error.status && <div className={styles.error}>{error.msg}</div>}
 </div>
 
 }
