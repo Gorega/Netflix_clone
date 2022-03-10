@@ -1,6 +1,6 @@
 import styles from "../styles/SideBar.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay,faBarsStaggered,faMagnifyingGlass,faUserAlt,faTv,faClapperboard,faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlay,faMagnifyingGlass,faUserAlt,faTv,faClapperboard,faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from "next/router";
 import { useContext,useEffect } from "react";
 import {AppContext} from "../ContextApi";
@@ -8,7 +8,7 @@ import {signOut} from "next-auth/react";
 
 function SideBar(){
     const router = useRouter();
-    const {user,showSideBar,setShowSideBar} = useContext(AppContext);
+    const {user,showSideBar,setShowSideBar,searchRef} = useContext(AppContext);
 
     const Navigate = (route)=>{
         router.push(route)
@@ -43,8 +43,10 @@ return <div className={`${styles.sideBar} ${showSideBar && styles.show}`}>
         <div className={styles.list}>
             <ul>
                 <li onClick={()=>setShowSideBar(false)}><FontAwesomeIcon icon={faPlay}/> Watch Now</li>
-                <li><FontAwesomeIcon icon={faBarsStaggered}/> Browse</li>
-                <li><FontAwesomeIcon icon={faMagnifyingGlass}/> Search</li>
+                <li onClick={()=>{
+                    searchRef.current.focus();
+                    setShowSideBar(false);
+                }}><FontAwesomeIcon icon={faMagnifyingGlass}/> Search</li>
                 <li onClick={()=> Navigate("/movies")}><FontAwesomeIcon icon={faClapperboard}/> Movies</li>
                 <li onClick={()=> Navigate("/tv")}><FontAwesomeIcon icon={faTv}/> TV Shows</li>
                 <li onClick={()=> Navigate("/people")}><FontAwesomeIcon icon={faUserAlt}/> People</li>

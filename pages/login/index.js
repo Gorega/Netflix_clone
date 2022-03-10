@@ -14,7 +14,7 @@ function LoginPage(){
     });
     
     if(status === "authenticated"){
-        router.replace("/dashboard")
+        router.replace("/profile")
     }
 
     if(loading){

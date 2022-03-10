@@ -9,6 +9,7 @@ import {server} from "../../lib/server"
 function EditProfile({profile}){
     const router = useRouter();
     const [error,setError] = useState({status:false,msg:""})
+    const [progress,setProgress] = useState(null);
     const [profileName,setProfileName] = useState(profile.name);
     const [imageFile,setImageFile] = useState(profile.image);
 
@@ -25,6 +26,7 @@ function EditProfile({profile}){
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 console.log('Upload is ' + progress + '% done');
+                setProgress(progress)
                 switch (snapshot.state) {
                 case 'paused':
                     console.log('Upload is paused');
@@ -55,6 +57,7 @@ function EditProfile({profile}){
             () => {
                 // Upload completed successfully, now we can get the download URL
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                setProgress(null)
                 setImageFile(downloadURL)
                 });
             }
@@ -90,6 +93,7 @@ return <Layout
     title="Edit Profile"
     text="Edit your current profile."
     imageFile={imageFile}
+    progress={progress}
     uploadProfileImage={uploadProfileImage}
     setProfileName={(e)=>setProfileName(e.target.value)}
     createProfileHandler={updateProfileHandler}

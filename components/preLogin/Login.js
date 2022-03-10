@@ -30,7 +30,7 @@ function Login(){
         if(!result.error){
             setDone(true)
             setLoading(false)
-            router.replace("/profile");
+            router.replace("/profile")
         }
     }
 

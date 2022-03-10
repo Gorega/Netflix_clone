@@ -11,7 +11,7 @@ import axios from 'axios'
 
 function Nav(){
     const router = useRouter();
-    const {user,setShowSideBar} = useContext(AppContext);
+    const {user,setShowSideBar,searchRef} = useContext(AppContext);
     const [sugg,setSugg] = useState([]);
     const [searchValue,setSearchValue] = useState(null);
 
@@ -68,7 +68,7 @@ return <div className={styles.navbar}>
 </div>
 <div className={styles.end}>
     <div className={styles.searchBox}>
-        <input type="search" placeholder="Search for a movie,tv show,person....." value={searchValue} onChange={searchFilter} />
+        <input type="search" placeholder="Search for a movie,tv show,person....." value={searchValue} onChange={searchFilter} ref={searchRef} />
         {(sugg?.length > 0 && searchValue) && <div className={styles.searchSugg}>
             <ul>
                 {sugg.slice(0,10).map((li,index)=>{

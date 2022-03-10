@@ -1,6 +1,6 @@
 import AppProvider from '../ContextApi'
 import '../styles/globals.css'
-import {SessionProvider,getSession} from "next-auth/react";
+import {SessionProvider} from "next-auth/react";
 import Router from 'next/router';
 import nprogress from 'nprogress';
 import "nprogress/nprogress.css"

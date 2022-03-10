@@ -10,6 +10,7 @@ function CreateProfile(){
     const router = useRouter();
     const defaultProfileImage = `https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png`;
     const [profileName,setProfileName] = useState(null);
+    const [progress,setProgress] = useState(null);
     const [imageFile,setImageFile] = useState(defaultProfileImage);
     const [error,setError] = useState({status:false,msg:""});
 
@@ -25,6 +26,7 @@ function CreateProfile(){
             (snapshot) => {
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setProgress(progress)
                 console.log('Upload is ' + progress + '% done');
                 switch (snapshot.state) {
                 case 'paused':
@@ -56,6 +58,7 @@ function CreateProfile(){
             () => {
                 // Upload completed successfully, now we can get the download URL
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                setProgress(null)
                 setImageFile(downloadURL)
                 });
             }
@@ -93,6 +96,7 @@ return <Layout
     title="Add Profile"
     text="Add a profile for another person watching Netflix."
     imageFile={imageFile}
+    progress={progress}
     uploadProfileImage={uploadProfileImage}
     setProfileName={(e)=>setProfileName(e.target.value)}
     createProfileHandler={createProfileHandler}
