@@ -22,28 +22,28 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
 
     const getMoviePoster = (e)=>{
         setSelectValue(e.target.value);
-        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${e.target.value}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`)
+        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/discover/movie?with_genres=${e.target.value}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`)
         .then(res => {
             const randomMovie = res.data.results[Math.floor(Math.random() * res.data.results.length - 1)]
             setTitle(randomMovie.title)
             setDescription(randomMovie.overview)
             setPosterImage(randomMovie.backdrop_path)
             setPosterId(randomMovie.id)
-            setMovies(res.data.items);
+            setMovies(res.data.results);
         })
         .catch(err => console.log(err));
 
         // get popular movies
         axios.get(requests.fetchPopularMovies)
         .then(res =>{
-            const filter = res.data.items.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
+            const filter = res.data.results.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
             setPopular(filter)
         }).catch(err => console.log(err));
 
         // get top rated movies
         axios.get(requests.fetchTopRatedMovies)
         .then(res =>{
-            const filter = res.data.items.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
+            const filter = res.data.results.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
             setTopRated(filter)
         }).catch(err => console.log(err));
     }
@@ -76,8 +76,8 @@ export async function getServerSideProps(context){
         }
     }
 
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${28}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`);
-    const data = await response.data.results;
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${28}?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`);
+    const data = await response.data.items;
     const randomMovie = data[Math.floor(Math.random() * data.length - 1)]
 
     // get genres names
