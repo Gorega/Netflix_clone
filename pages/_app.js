@@ -1,6 +1,7 @@
 import AppProvider from '../ContextApi'
 import '../styles/globals.css'
 import {SessionProvider} from "next-auth/react";
+import Head from 'next/head';
 import Router from 'next/router';
 import nprogress from 'nprogress';
 import "nprogress/nprogress.css"
@@ -14,6 +15,10 @@ function MyApp({ Component, pageProps:{
 } }) {
 
   return <>
+     <Head>
+      <title>Netflix</title>
+      <meta name="description" content="Netflix App" />
+    </Head>
     <SessionProvider session={session}>
     <AppProvider>
     <Component {...pageProps} />

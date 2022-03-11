@@ -5,16 +5,20 @@ import Nav from "../../components/Nav";
 import axios from "axios";
 import { requests } from "../../lib/requests";
 import {getSession} from "next-auth/react";
+import Head from "next/head";
 
 function Kids({poster,kidsMovies,popularMoviesList,topRatedMoviesList}){
 return <>
-<Nav />
-<div className={styles.home}>
-    <Poster title={poster.title} description={poster.overview} poster={poster.backdrop_path} route="movies" id={poster.id} />
-    <Section title="Kids Movies" list={kidsMovies} />
-    <Section title="Popular Kids Movies" list={popularMoviesList} />
-    <Section title="Top Rated Kids Movies" list={topRatedMoviesList} />
-</div>
+    <Head>
+        <title>Kids</title>
+    </Head>
+    <Nav />
+    <div className={styles.home}>
+        <Poster title={poster.title} description={poster.overview} poster={poster.backdrop_path} route="movies" id={poster.id} />
+        <Section title="Kids Movies" list={kidsMovies} />
+        <Section title="Popular Kids Movies" list={popularMoviesList} />
+        <Section title="Top Rated Kids Movies" list={topRatedMoviesList} />
+    </div>
 </>
 
 }

@@ -5,9 +5,13 @@ import axios from "axios";
 import Nav from "../../components/Nav";
 import { requests } from "../../lib/requests";
 import {getSession} from "next-auth/react"
+import Head from "next/head";
 
 function Tv({poster,tvShows,popularTv,topRatedTv}){
 return <>
+<Head>
+    <title>TV Shows</title>
+</Head>
 <Nav />
 <div className={styles.home}>
     <Poster title={poster.name} description={poster.overview} poster={poster.backdrop_path} route="tv" id={poster.id} />

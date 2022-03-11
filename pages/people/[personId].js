@@ -1,9 +1,15 @@
 import axios from "axios";
 import PersonHome from "../../components/person/PersonHome";
 import {getSession} from "next-auth/react"
+import Head from "next/head";
 
 function Person({person,credits,socialLinks}){
-return <PersonHome person={{...person}} credits={{...credits}} social={{...socialLinks}} />
+return <>
+    <Head>
+        <title>{person.name}</title>
+    </Head>
+    <PersonHome person={{...person}} credits={{...credits}} social={{...socialLinks}} />
+</>
 }
 
 export async function getServerSideProps(context){

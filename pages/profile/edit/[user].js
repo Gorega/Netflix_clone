@@ -2,9 +2,15 @@ import axios from "axios";
 import EditProfile from "../../../components/profile/EditProflle";
 import {server} from "../../../lib/server";
 import {getSession} from "next-auth/react"
+import Head from "next/head";
 
 function EditProfilePage({profile}){
-return <EditProfile profile={{...profile}} />
+return <>
+<Head>
+    <title>Edit Profile</title>
+</Head>
+<EditProfile profile={{...profile}} />
+</>
 
 }
 

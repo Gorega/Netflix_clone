@@ -3,9 +3,14 @@ import Header from "../../components/movie/Header";
 import axios from "axios";
 import MovieBody from "../../components/movie/MovieBody";
 import {getSession} from "next-auth/react";
+import Head from "next/head";
 
 function Movie({movie,credits,reviews,media,videos,recommendations,keywords,socialLinks}){
-return <div className={styles.movie}>
+return <>
+<Head>
+    <title>{movie.name}</title>
+</Head>
+<div className={styles.movie}>
     <Header movie={{...movie}} credits={credits} trailer={{...videos}}
     />
     <MovieBody credits={credits}
@@ -20,6 +25,7 @@ return <div className={styles.movie}>
     />
 
 </div>
+</>
 
 }
 

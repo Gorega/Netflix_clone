@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import {server} from "../../lib/server";
+import Head from "next/head";
 
 function WatchlistPage(){
     const [loading,setLoading] = useState(false);
@@ -30,6 +31,9 @@ function WatchlistPage(){
     },[])
 
 return <>
+<Head>
+    <title>Your Watchlist</title>
+</Head>
 <Nav />
 <div className={styles.watchlist}>
     <h2>Watch List</h2>

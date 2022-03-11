@@ -2,6 +2,7 @@ import Login from "../../components/preLogin/Login";
 import {useSession} from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 function LoginPage(){
     const router = useRouter();
@@ -21,7 +22,12 @@ function LoginPage(){
         return <div>...loading</div>
     }
 
-return <Login />
+return <>
+    <Head>
+        <title>Login</title>
+    </Head>
+    <Login />
+</>
 
 }
 

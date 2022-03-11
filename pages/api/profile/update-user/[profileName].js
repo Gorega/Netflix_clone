@@ -16,7 +16,7 @@ async function handler(req,res){
     }
 
         const profiles = await client.db().collection("users").findOne({email:session.user.email});
-        const existProfileName = profiles.profiles.find((profile) => profile.name.toLowerCase() === name.toLowerCase())
+        const existProfileName = profiles.profiles.find((profile) => profile.name.toLowerCase() === name.toLowerCase() && profile.name.toLowerCase() !== profileName)
         if(existProfileName){
             return res.status(422).json({msg:"Profile name is already exist, please choose anohter one"})
         }

@@ -47,7 +47,6 @@ return <div className={styles.body}>
         </div>
         </div>
     }) : "You have not added any to your watchlist"}
-        
 </div>
 
 }

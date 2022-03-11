@@ -1,8 +1,14 @@
 import CreateProfile from "../../components/profile/CreateProfile";
 import {getSession} from "next-auth/react";
+import Head from "next/head";
 
 function CreateProfilePage(){
-return <CreateProfile />
+return <>
+<Head>
+    <title>Add Profile</title>
+</Head>
+<CreateProfile />
+</>
 
 }
 

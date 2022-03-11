@@ -6,6 +6,7 @@ import Nav from "../../components/Nav";
 import { requests } from "../../lib/requests";
 import styles from "../../styles/Home.module.css"
 import {getSession} from "next-auth/react";
+import Head from "next/head";
 
 function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
 
@@ -21,41 +22,44 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
 
     const getMoviePoster = (e)=>{
         setSelectValue(e.target.value);
-        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/discover/movie?with_genres=${e.target.value}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`)
+        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${e.target.value}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`)
         .then(res => {
             const randomMovie = res.data.results[Math.floor(Math.random() * res.data.results.length - 1)]
             setTitle(randomMovie.title)
             setDescription(randomMovie.overview)
             setPosterImage(randomMovie.backdrop_path)
             setPosterId(randomMovie.id)
-            setMovies(res.data.results);
+            setMovies(res.data.items);
         })
         .catch(err => console.log(err));
 
         // get popular movies
         axios.get(requests.fetchPopularMovies)
         .then(res =>{
-            const filter = res.data.results.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
+            const filter = res.data.items.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
             setPopular(filter)
         }).catch(err => console.log(err));
 
         // get top rated movies
         axios.get(requests.fetchTopRatedMovies)
         .then(res =>{
-            const filter = res.data.results.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
+            const filter = res.data.items.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
             setTopRated(filter)
         }).catch(err => console.log(err));
     }
 
 
 return <>
-<Nav />
-<div className={styles.home}>
-    <Poster title={title} description={description} poster={posterImage} genres={genres} getMoviePoster={getMoviePoster} route="movies" id={postId} />
-    <Section title="Movies" list={Movies} />
-    <Section title="Popular Movies" list={popular} />
-    <Section title="Top Rated Movies" list={topRated} />
-</div>
+    <Head>
+        <title>Movies</title>
+    </Head>
+    <Nav />
+    <div className={styles.home}>
+        <Poster title={title} description={description} poster={posterImage} genres={genres} getMoviePoster={getMoviePoster} route="movies" id={postId} />
+        <Section title="Movies" list={Movies} />
+        <Section title="Popular Movies" list={popular} />
+        <Section title="Top Rated Movies" list={topRated} />
+    </div>
 </>
 
 }
@@ -72,7 +76,7 @@ export async function getServerSideProps(context){
         }
     }
 
-    const response = await axios.get(`${requests.fetchDiscoverMovies}&with_genres=28`);
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${28}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`);
     const data = await response.data.results;
     const randomMovie = data[Math.floor(Math.random() * data.length - 1)]
 

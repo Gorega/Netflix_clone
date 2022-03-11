@@ -5,6 +5,7 @@ import PersonCard from "../../components/person/personCard";
 import { requests } from "../../lib/requests";
 import styles from "../../styles/People.module.css";
 import {getSession} from "next-auth/react"
+import Head from "next/head";
 
 function People({people}){
     const [currentPage,setCurrentPage] = useState(1);
@@ -26,23 +27,26 @@ function People({people}){
     }
 
 return <>
-<Nav />
-<div className={styles.people}>
-        <h2>Popular People</h2>
-    <div className={styles.body}>
-        {loading ? "...loading" : peopleData.map((person,index)=>{
-            const knownFor = person.known_for.map((movie)=> movie.title || movie.name);
-            return <PersonCard key={index} profile_id={person.id} profile_img={person.profile_path} profile_name={person.name} known_for={`${knownFor.join(", ").substring(0,50)} ...`} />
-        })}
+    <Head>
+        <title>People</title>
+    </Head>
+    <Nav />
+    <div className={styles.people}>
+            <h2>Popular People</h2>
+        <div className={styles.body}>
+            {loading ? "...loading" : peopleData.map((person,index)=>{
+                const knownFor = person.known_for.map((movie)=> movie.title || movie.name);
+                return <PersonCard key={index} profile_id={person.id} profile_img={person.profile_path} profile_name={person.name} known_for={`${knownFor.join(", ").substring(0,50)} ...`} />
+            })}
+        </div>
+        <div className={styles.pages}>
+            <ul>
+            {pages.slice(0,7).map((page,index)=>{
+                return <li key={index} className={`${index === currentPage-1 && styles.active}`} onClick={()=> changePageHandler(index+1)}>{page}</li>
+            })}
+            </ul>
+        </div>
     </div>
-    <div className={styles.pages}>
-        <ul>
-        {pages.slice(0,7).map((page,index)=>{
-            return <li key={index} className={`${index === currentPage-1 && styles.active}`} onClick={()=> changePageHandler(index+1)}>{page}</li>
-        })}
-        </ul>
-    </div>
-</div>
 
 </>
 
