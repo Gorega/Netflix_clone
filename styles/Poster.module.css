@@ -34,6 +34,9 @@
 .poster .genre select option{
     background-color: #181818;
     color:white;
+    padding:10px 0;
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .poster .genre select:focus{

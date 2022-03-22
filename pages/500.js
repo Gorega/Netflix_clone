@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { useRouter } from "next/router"
 
 export default function Custom500() {
-    const router = useRouter();
     return <>
    <Head>
       <title>Error</title>
@@ -10,7 +8,7 @@ export default function Custom500() {
     <div className="not-found">
          <div>
             <h1>500 - Server-side error occurred</h1>
-            <button onClick={()=> router.push("/dashboard")}>Home page</button>
+            <button onClick={()=> window.location.reload()}>Refresh page</button>
          </div>
     </div>
     </>
