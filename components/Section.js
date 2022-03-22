@@ -1,7 +1,7 @@
 import styles from "../styles/Section.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft,faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import {useLayoutEffect, useRef, useState} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {useRouter} from "next/router"
 
 function Section({title,list,route}){
@@ -11,6 +11,7 @@ function Section({title,list,route}){
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const [showControl,setShowControl] = useState(false);
     const [pageWidth,setPageWidth] = useState(null);
+    let listRefWidth;
     const router = useRouter();
 
     const scrollRight = ()=>{
@@ -27,17 +28,19 @@ function Section({title,list,route}){
         })
     }
 
-
     useLayoutEffect(()=>{
-        const listRefWidth = listRef.current.scrollWidth;        
+        listRefWidth = listRef.current.scrollWidth;        
         setPageWidth(window.innerWidth);
         if(listRefWidth > pageWidth){
             setShowControl(true)
         }else{
             setShowControl(false)
         }
-            
     },[pageWidth])
+
+    useEffect(()=>{
+
+    },[listRefWidth])
 
 
 return <div className={styles.section}>
@@ -53,7 +56,7 @@ return <div className={styles.section}>
             <h2>{movie.title || movie.name}</h2>
             </div>
         }) : <div style={{fontSize:13,marginLeft:10}}>No movies to show ...</div>}
-        {showControl && <div className={styles.control}>
+        {showControl && list.length >= 7 && <div className={styles.control}>
                 <span onClick={scrollLeft}><FontAwesomeIcon icon={faAngleLeft} /></span>
                 <span onClick={scrollRight}><FontAwesomeIcon icon={faAngleRight} /></span>
         </div>}

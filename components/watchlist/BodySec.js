@@ -42,7 +42,7 @@ return <div className={styles.body}>
             }
         }}>{list.title}</h2>
         <span>{list.release_date}</span>
-        <div className={styles.control} onClick={()=>deleteMovieHandler(list.id )}>
+        <div className={styles.control} onClick={()=>deleteMovieHandler(list.id)}>
             <FontAwesomeIcon icon={faTimes} />
         </div>
         </div>

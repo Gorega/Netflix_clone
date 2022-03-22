@@ -34,10 +34,6 @@
     color:white;
 }
 
-.list .Mui-selected{
-    background-color: white;
-}
-
 @media(max-width:576px){
     .people .body{
         display: block;

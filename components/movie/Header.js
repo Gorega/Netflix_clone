@@ -7,8 +7,20 @@ import Nav from "../Nav";
 import { AppContext } from "../../ContextApi";
 import {server} from "../../lib/server"
 import axios from "axios";
+import { makeStyles } from '@mui/styles';
+import Rating from '@mui/material/Rating';
+
+const useStyles = makeStyles({
+    root:{
+       "& .MuiRating-label":{
+           color:"green",
+           fontSize:40,
+       }
+    }
+})
 
 function Header({movie,credits,trailer}){
+    const classes = useStyles();
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const [showTrailer,setShowTrailer] = useState(false);
     const [listedLoading,setListedLoading] = useState(false);

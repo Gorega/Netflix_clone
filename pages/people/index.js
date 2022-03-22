@@ -12,8 +12,7 @@ import Head from "next/head";
 const useStyles = makeStyles({
     root:{
        "& .Mui-selected":{
-        backgroundColor: "white",
-        color:"black"
+           border:"2px solid white",
        }
     }
 })
