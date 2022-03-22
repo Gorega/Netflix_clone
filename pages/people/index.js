@@ -5,17 +5,24 @@ import PersonCard from "../../components/person/personCard";
 import { requests } from "../../lib/requests";
 import styles from "../../styles/People.module.css";
 import {getSession} from "next-auth/react"
+import Pagination from '@mui/material/Pagination';
+import { makeStyles } from '@mui/styles';
 import Head from "next/head";
 
+const useStyles = makeStyles({
+    root:{
+       "& .Mui-selected":{
+        backgroundColor: "white",
+        color:"black"
+       }
+    }
+})
+
 function People({people}){
+    const classes = useStyles();
     const [currentPage,setCurrentPage] = useState(1);
     const [peopleData,setPeopleData] = useState(people);
     const [loading,setLoading] = useState(false);
-    let pages = [];
-    // loop pages function
-    for(let i=1;i <= 500; i++){
-        pages.push(i);
-    }
 
     const changePageHandler = async (currentPage)=>{
         setCurrentPage(currentPage)
@@ -40,11 +47,14 @@ return <>
             })}
         </div>
         <div className={styles.pages}>
-            <ul>
-            {pages.slice(0,7).map((page,index)=>{
-                return <li key={index} className={`${index === currentPage-1 && styles.active}`} onClick={()=> changePageHandler(index+1)}>{page}</li>
-            })}
-            </ul>
+            <Pagination className={`${styles.list} ${classes.root}`}
+                    size="large"
+                    count={500}
+                    variant="outlined"
+                    shape="circular"
+                    page={currentPage}
+                    onChange={(e)=> changePageHandler(parseInt(e.target.textContent))}
+                    />
         </div>
     </div>
 

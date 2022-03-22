@@ -19,18 +19,23 @@
 .people .pages{
     margin:40px auto;
     text-align: center;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.people .pages ul li{
-    display: inline-block;
-    margin-right:10px;
-    border:1px solid #d9d9d9;
-    padding:5px 5px;
-    cursor: pointer;
+
+.list ul li div{
+    color:White;
 }
 
-.people .pages ul li.active{
-    background-color: darkred;
+.list ul li button{
+    color:white;
+}
+
+.list .Mui-selected{
+    background-color: white;
 }
 
 @media(max-width:576px){

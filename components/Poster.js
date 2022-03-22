@@ -12,7 +12,7 @@ function Poster({title,description,poster,genres,getMoviePoster,route,id}){
 
 return <div className={styles.poster} style={{backgroundImage:`url(${baseImgaeUrl}/${poster})`}}>
         <div className={styles.overlay}></div>
-    {genres && <div className={styles.genre}>
+        {genres && <div className={styles.genre}>
         Genre
         <select onChange={getMoviePoster}>
             {genres.map((genre,index)=>{

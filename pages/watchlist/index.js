@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import {server} from "../../lib/server";
 import Head from "next/head";
+import { getSession } from "next-auth/react";
 
 function WatchlistPage(){
     const [loading,setLoading] = useState(false);
@@ -48,6 +49,22 @@ return <>
 </div>
 </>
 
+}
+
+export async function getServerSideProps(context){
+    const session = await getSession({req:context.req});
+    if(!session){
+        return{
+            redirect:{
+                destination:"/login",
+                permanent:false
+            }
+        }
+    }
+
+    return{
+        props:{}
+    }
 }
 
 export default WatchlistPage;
