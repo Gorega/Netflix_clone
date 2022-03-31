@@ -11,6 +11,14 @@
     margin-bottom:25px;
 }
 
+.section .title{
+    cursor: default;
+}
+
+.section .title::selection{
+    background-color: transparent;
+}
+
 .section .list{
     display: flex;
     flex-wrap: nowrap;
