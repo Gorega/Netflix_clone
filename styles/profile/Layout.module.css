@@ -41,7 +41,7 @@
 }
 
 .main .body .control::after{
-    bottom:-50px;
+    bottom:-70px;
 }
 
 .main .body .control{
@@ -54,8 +54,8 @@
 
 .main .body .control .image{
     position: relative;
-    width:20vh;
-    height:20vh;
+    width:10rem;
+    height:9rem;
 }
 
 .main .body .control img{
@@ -91,7 +91,7 @@
 }
 
 .main .body .control .formControl{
-    margin-left:20px;
+    margin-left:10px;
 }
 
 .main .body .control input{
@@ -118,7 +118,7 @@
 }
 
 .main .body .submit{
-    margin-top:75px;
+    margin-top:80px;
     display: block;
     align-items: center;
 }

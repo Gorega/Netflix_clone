@@ -14,8 +14,8 @@
 }
 
 .navbar .logo{
-    width:15vh;
-    height:40px;
+    width:7rem;
+    height:2rem;
     cursor: pointer;
 }
 
@@ -136,16 +136,7 @@
     cursor: pointer;
 }
 
-@media(max-width:768px){
-    .navbar .logo{
-        width:15vh;
-    }
-}
-
 @media(max-width:1200px){
-    .navbar .logo{
-        width:12vh;
-    }
 
     .navbar .list{
         display:none;
