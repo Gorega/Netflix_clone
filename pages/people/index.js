@@ -47,7 +47,6 @@ return <>
         </div>
         <div className={styles.pages}>
             <Pagination className={`${styles.list} ${classes.root}`}
-                    size="large"
                     count={500}
                     variant="outlined"
                     shape="circular"

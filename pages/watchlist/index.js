@@ -42,7 +42,7 @@ return <>
         <div className={styles.filters}>
             <FiltersSec searchBoxHandler={searchBoxHandler} searchValue={searchValue} />
         </div>
-        <div className={styles.body}>
+        <div className={styles.inner}>
             {loading ? <div className={styles.loading}><FontAwesomeIcon className="fa-spin" icon={faSpinner} /></div> : <BodySec watchlist={watchList} searchValue={searchValue} />}
         </div>
     </div>

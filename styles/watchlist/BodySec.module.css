@@ -5,14 +5,14 @@
 
 .body .sec{
     position: relative;
-    margin-left:40px;
+    margin-right:40px;
     margin-bottom:40px;
     width: min-content;
 }
 
 .body .sec .poster{
-    width:25vh;
-    height:40vh;
+    width:16rem;
+    height:19rem;
     border-radius: 5px;
     position: relative;
     cursor: pointer;
@@ -94,13 +94,10 @@
 }
 
 @media(max-width:768px){
+
     .body{
         display: block;
-        margin:auto;
-        margin-top:50px;
+        margin:50px auto;
         position: relative;
-        left:35%;
-        transform: translateX(-50%);
     }
 }
-

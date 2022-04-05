@@ -3,6 +3,7 @@
     color:white;
     padding:100px 40px;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .people h2{
@@ -34,28 +35,19 @@
     color:white;
 }
 
-@media(max-width:576px){
-    .people .body{
-        display: block;
-        width:50%;
-        margin: auto;
-    }
-}
-
 
 @media(max-width:768px) {
 
     .people .body{
         display: block;
-        width:60%;
+        width:16rem;
         margin: auto;
     }
 }
 
 
-@media(min-width:768px) and (max-width:1200px){
+@media(min-width:767px) and (max-width:1200px){
     .people .body{
         grid-template-columns: repeat(3,31%);
     }
-
 }

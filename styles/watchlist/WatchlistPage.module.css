@@ -20,12 +20,12 @@
     min-width:300px;
 }
 
-.watchlist .content .body{
+.watchlist .content .inner{
     margin-left:50px;
     position: relative;
 }
 
-.watchlist .body .loading{
+.watchlist .inner .loading{
     margin-top:10px;
     font-size:35px;
     justify-self: center;
@@ -38,5 +38,9 @@
 
     .watchlist .body .loading{
         margin-top:50px;
+    }
+
+    .watchlist .content .inner{
+        margin:auto
     }
 }
