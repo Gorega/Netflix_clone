@@ -80,6 +80,7 @@
     height:60px;
     display:inline-flex;
     align-items: center;
+    min-width: 100%;
 }
 
 .main .body form input{
