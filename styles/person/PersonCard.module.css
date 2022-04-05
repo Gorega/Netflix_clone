@@ -6,12 +6,13 @@
 
 .main .body{
     width:100%;
+    height:25rem;
     margin-bottom:35px;
 }
 
 .main .body img{
     width:100%;
-    height:40vh;
+    height: 90%;
     cursor: pointer;
 }
 
