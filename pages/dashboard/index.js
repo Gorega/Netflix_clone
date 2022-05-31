@@ -49,7 +49,6 @@ export async function getServerSideProps(context){
       playingNow:data,
       moviesList:moviesList,
       tvLists:tvLists,
-      session
     }
   }
 }
