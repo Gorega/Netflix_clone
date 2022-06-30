@@ -38,6 +38,7 @@
     height:20vh;
     border-radius: 5px;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .users .list .sec h3{

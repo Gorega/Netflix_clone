@@ -1,17 +1,35 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/movie/MovieBody.module.css";
 import MovieBodySide from "./MovieBodySide";
+import axios from "axios";
 
-function MovieBody({credits,reviews,movie,videos,media,keywords,social,recommendation,route}){
-
+function MovieBody({credits,reviews,movie,videos,keywords,social,recommendation,route}){
+    
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const avaterImageUrl = "https://www.themoviedb.org/u";
     const baseVideoUrl = "https://www.youtube.com/watch"
     const [socialSwitch,setSocialSwitch] = useState(0);
     const [mediaSwitch,setMediaSwitch] = useState(0);
+    const [mediaBackrops,setMediaBackdrops] = useState([]);
+    const [mediaPosters,setMediaPosters] = useState([]);
     const [showReviewContent,setShowReviewContent] = useState(false);
+    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const router = useRouter();
+    const {movieId} = router.query;
+
+    const fetchMovieMeidaBackdrops = async ()=>{
+        const response = await axios.get(`${MDB_URL}/movie/${movieId}/images?api_key=${api_key}`);
+        const data = await response.data.backdrops.slice(0,10);
+        setMediaBackdrops(data);
+    }
+
+    const fetchMovieMeidaPosters = async ()=>{
+        const response = await axios.get(`${MDB_URL}/movie/${movieId}/images?api_key=${api_key}`);
+        const data = await response.data.posters.slice(0,8);
+        setMediaPosters(data);
+    }
 
 return <div className={styles.main}>
     <div className={styles.leftSec}>
@@ -56,8 +74,14 @@ return <div className={styles.main}>
                     <h2>Media</h2>
                     <ul>
                         <li onClick={()=> setMediaSwitch(0)} className={mediaSwitch === 0 && styles.active}>Videos</li>
-                        <li onClick={()=> setMediaSwitch(1)} className={mediaSwitch === 1 && styles.active}>Backdrops</li>
-                        <li onClick={()=> setMediaSwitch(2)} className={mediaSwitch === 2 && styles.active}>Posters</li>
+                        <li onClick={()=> {
+                            setMediaSwitch(1);
+                            mediaBackrops.length <= 0 && fetchMovieMeidaBackdrops();
+                        }} className={mediaSwitch === 1 && styles.active}>Backdrops</li>
+                        <li onClick={()=> {
+                            setMediaSwitch(2);
+                            mediaPosters.length <= 0 && fetchMovieMeidaPosters();
+                        }} className={mediaSwitch === 2 && styles.active}>Posters</li>
                     </ul>
                 </div>
 
@@ -68,12 +92,12 @@ return <div className={styles.main}>
                         <video src={`${baseVideoUrl}/${video.key}`} alt="" autoPlay="off" controls poster={`${baseImgaeUrl}/${movie.backdrop_path}`} />
                     </div>
                     })}
-                    {mediaSwitch === 1 && media.backdrops.map((media,index)=>{
+                    {mediaSwitch === 1 && mediaBackrops?.map((media,index)=>{
                         return <div key={index} className={styles.sec}>
                         <img src={`${baseImgaeUrl}/${media.file_path}`} alt="" />
                     </div>
                     })}
-                    {mediaSwitch === 2 && media.posters.map((media,index)=>{
+                    {mediaSwitch === 2 && mediaPosters?.map((media,index)=>{
                         return <div key={index} className={`${styles.sec && styles.posters}`}>
                         <img src={`${baseImgaeUrl}/${media.file_path}`} alt="" />
                     </div>

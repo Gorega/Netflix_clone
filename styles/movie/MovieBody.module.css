@@ -36,6 +36,7 @@
     width:17vh;
     height:20vh;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .main .leftSec .cast .list h2{
@@ -103,6 +104,7 @@
     width:100%;
     height:100%;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .main .leftSec .social .in .user .info{
@@ -144,6 +146,7 @@
 
 .main .leftSec .media .in .list .posters img{
     width:20vh;
+    object-fit: cover;
 }
 
 .main .leftSec .media .in .list .sec{
@@ -159,6 +162,7 @@
 .main .leftSec .media .in .list .sec img{
     width:50vh;
     height:30vh;
+    object-fit: cover;
 }
 
 .main .leftSec .recommended{
@@ -176,6 +180,7 @@
     height:30vh;
     border-radius: 5px;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .main .leftSec .recommended .list .sec h4{

@@ -55,7 +55,7 @@
 .main .body .control .image{
     position: relative;
     width:10rem;
-    height:9rem;
+    height:10rem;
 }
 
 .main .body .control img{
@@ -64,6 +64,7 @@
     border-radius: 5px;
     cursor: pointer;
     margin-bottom:20px;
+    object-fit: cover;
 }
 .main .body .control .image .progress{
     width:100%;

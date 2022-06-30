@@ -1,7 +1,7 @@
 import styles from "../styles/Section.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft,faAngleRight } from '@fortawesome/free-solid-svg-icons'
-import {useEffect, useLayoutEffect, useRef, useState} from "react";
+import {useLayoutEffect, useRef, useState} from "react";
 import {useRouter} from "next/router"
 
 function Section({title,list,route}){
@@ -37,11 +37,6 @@ function Section({title,list,route}){
             setShowControl(false)
         }
     },[pageWidth])
-
-    useEffect(()=>{
-
-    },[listRefWidth])
-
 
 return <div className={styles.section}>
     <div className={styles.title}>

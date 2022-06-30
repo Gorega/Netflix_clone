@@ -5,7 +5,7 @@ import MovieBody from "../../components/movie/MovieBody";
 import {getSession} from "next-auth/react"
 import Head from "next/head";
 
-function Movie({movie,credits,reviews,media,videos,recommendations,keywords,socialLinks}){
+function Movie({movie,credits,reviews,videos,recommendations,keywords,socialLinks}){
 
 return <>
     <Head>
@@ -18,7 +18,6 @@ return <>
     />
     <MovieBody credits={credits}
                 reviews={reviews[0]}
-                media={media}
                 recommendation={recommendations}
                 movie={{...movie}}
                 keywords={keywords}
@@ -66,10 +65,6 @@ export async function getServerSideProps(context){
     const reviewsRes = await axios.get(`${MDB_URL}/movie/${movieId}/reviews?api_key=${api_key}`);
     const reviewsData = await reviewsRes.data.results;
 
-    // fetch movie Media
-    const mediaRes = await axios.get(`${MDB_URL}/movie/${movieId}/images?api_key=${api_key}`);
-    const mediaData = await mediaRes.data;
-
     // fetch movie Videos
     const videosRes = await axios.get(`${MDB_URL}/movie/${movieId}/videos?api_key=${api_key}`,{withCredentials:true});
     const videosData = await videosRes.data;
@@ -92,7 +87,6 @@ export async function getServerSideProps(context){
             movie:data,
             credits:ParicipantsData,
             reviews:reviewsData,
-            media:mediaData,
             recommendations:recommendationData,
             keywords:keywordsData,
             videos:videosData,

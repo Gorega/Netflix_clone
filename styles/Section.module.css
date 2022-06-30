@@ -23,7 +23,11 @@
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
-    overflow: hidden;
+    overflow: auto;
+}
+
+.section .list::-webkit-scrollbar{
+    display: none;
 }
 
 .section .list .movie{
@@ -37,6 +41,7 @@
     width:25vh;
     height:25vh;
     cursor: pointer;
+    object-fit: cover;
 }
 
 .section .list .movie:hover{
@@ -64,8 +69,9 @@
     cursor: pointer;
     transition: .3s all;
     position: relative;
-    top:90px;
     color:white;
+    position: absolute;
+    top:10vh;
 }
 
 .section .control span:first-of-type{
@@ -84,8 +90,5 @@
 @media(max-width:1200px){
     .section .control{
         display: none;
-    }
-    .section .list{
-        overflow:auto;
     }
 }
