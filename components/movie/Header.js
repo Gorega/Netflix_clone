@@ -121,7 +121,7 @@ return <>
         </div>
     </div>
     <div className={`${styles.notification} ${listed.status && styles.show}`} style={{backgroundColor:listed.error ? "darkred" : "green"}}>{listed.msg}</div>
-    {showTrailer && <Trailer closeTrailer={()=> setShowTrailer(false)} trailerPath={trailer.key} posterPath={movie.poster_path} />}
+    {showTrailer && <Trailer closeTrailer={()=> setShowTrailer(false)} trailerPath={trailer.results[0]?.key} posterPath={movie.poster_path} />}
 </div>
 </>
 

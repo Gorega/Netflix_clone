@@ -4,6 +4,7 @@ import axios from "axios";
 import MovieBody from "../../components/movie/MovieBody";
 import {getSession} from "next-auth/react"
 import Head from "next/head";
+import { useEffect } from "react";
 
 function Movie({movie,credits,reviews,videos,recommendations,keywords,socialLinks}){
 
@@ -14,7 +15,7 @@ return <>
     <div className={styles.movie}>
     <Header movie={{...movie}}
             credits={credits}
-            trailer={{...videos}}
+            trailer={videos}
     />
     <MovieBody credits={credits}
                 reviews={reviews[0]}
@@ -66,9 +67,11 @@ export async function getServerSideProps(context){
     const reviewsData = await reviewsRes.data.results;
 
     // fetch movie Videos
-    const videosRes = await axios.get(`${MDB_URL}/movie/${movieId}/videos?api_key=${api_key}`,{withCredentials:true});
+    const videosRes = await axios.get(`${MDB_URL}/movie/${movieId}/videos?api_key=${api_key}`,{headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/plain",
+    }});
     const videosData = await videosRes.data;
-
     // fetch movie recommendations
     const recommendationRes = await axios.get(`${MDB_URL}/movie/${movieId}/recommendations?api_key=${api_key}`);
     const recommendationData = await recommendationRes.data.results;

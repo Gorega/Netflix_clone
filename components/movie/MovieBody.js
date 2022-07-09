@@ -8,25 +8,25 @@ function MovieBody({credits,reviews,movie,videos,keywords,social,recommendation,
     
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const avaterImageUrl = "https://www.themoviedb.org/u";
-    const baseVideoUrl = "https://www.youtube.com/watch"
+    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const [socialSwitch,setSocialSwitch] = useState(0);
     const [mediaSwitch,setMediaSwitch] = useState(0);
     const [mediaBackrops,setMediaBackdrops] = useState([]);
     const [mediaPosters,setMediaPosters] = useState([]);
     const [showReviewContent,setShowReviewContent] = useState(false);
-    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
-    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const router = useRouter();
     const {movieId} = router.query;
+    const {tvId} = router.query;
 
     const fetchMovieMeidaBackdrops = async ()=>{
-        const response = await axios.get(`${MDB_URL}/movie/${movieId}/images?api_key=${api_key}`);
+        const response = await axios.get(`${MDB_URL}/${router.pathname.includes("movie") ? "movie" : "tv"}/${movieId || tvId}/images?api_key=${api_key}`);
         const data = await response.data.backdrops.slice(0,10);
         setMediaBackdrops(data);
     }
 
     const fetchMovieMeidaPosters = async ()=>{
-        const response = await axios.get(`${MDB_URL}/movie/${movieId}/images?api_key=${api_key}`);
+        const response = await axios.get(`${MDB_URL}/${router.pathname.includes("movie") ? "movie" : "tv"}/${movieId || tvId}/images?api_key=${api_key}`);
         const data = await response.data.posters.slice(0,8);
         setMediaPosters(data);
     }
@@ -89,7 +89,7 @@ return <div className={styles.main}>
                 <div className={styles.list}>
                     {mediaSwitch === 0 && videos.results.slice(0,3).map((video,index)=>{
                         return <div key={index} className={styles.sec}>
-                        <video src={`${baseVideoUrl}/${video.key}`} alt="" autoPlay="off" controls poster={`${baseImgaeUrl}/${movie.backdrop_path}`} />
+                        <video src={`https://www.youtube.com/watch?v=${video?.key}`} alt="" autoPlay="off" controls poster={`${baseImgaeUrl}/${movie.backdrop_path}`} />
                     </div>
                     })}
                     {mediaSwitch === 1 && mediaBackrops?.map((media,index)=>{

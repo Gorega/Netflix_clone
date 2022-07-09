@@ -5,17 +5,18 @@ import MovieBody from "../../components/movie/MovieBody";
 import {getSession} from "next-auth/react";
 import Head from "next/head";
 
-function Movie({movie,credits,reviews,media,videos,recommendations,keywords,socialLinks}){
+function Movie({movie,credits,reviews,videos,recommendations,keywords,socialLinks}){
 return <>
 <Head>
     <title>{movie.name}</title>
 </Head>
 <div className={styles.movie}>
-    <Header movie={{...movie}} credits={credits} trailer={{...videos}}
+    <Header movie={{...movie}}
+            credits={credits}
+            trailer={videos}
     />
     <MovieBody credits={credits}
             reviews={reviews[0]}
-            media={media}
             recommendation={recommendations}
             movie={{...movie}}
             keywords={keywords}
@@ -54,13 +55,13 @@ export async function getServerSideProps(context){
     const reviewsRes = await axios.get(`${MDB_URL}/tv/${tvId}/reviews?api_key=${api_key}`);
     const reviewsData = await reviewsRes.data.results;
 
-    // fetch movie Media
-    const mediaRes = await axios.get(`${MDB_URL}/tv/${tvId}/images?api_key=${api_key}`);
-    const mediaData = await mediaRes.data;
-
     // fetch movie Videos
-    const videosRes = await axios.get(`${MDB_URL}/tv/${tvId}/videos?api_key=${api_key}`);
+    const videosRes = await axios.get(`${MDB_URL}/tv/${tvId}/videos?api_key=${api_key}`,{headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/plain",
+    }});
     const videosData = await videosRes.data;
+    console.log(videosRes)
 
     // fetch movie recommendations
     const recommendationRes = await axios.get(`${MDB_URL}/tv/${tvId}/recommendations?api_key=${api_key}`);
@@ -79,7 +80,6 @@ export async function getServerSideProps(context){
             movie:data,
             credits:ParicipantsData,
             reviews:reviewsData,
-            media:mediaData,
             recommendations:recommendationData,
             keywords:keywordsData,
             videos:videosData,
