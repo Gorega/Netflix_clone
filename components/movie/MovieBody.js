@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../../styles/movie/MovieBody.module.css";
 import MovieBodySide from "./MovieBodySide";
 import axios from "axios";
@@ -89,7 +89,7 @@ return <div className={styles.main}>
                 <div className={styles.list}>
                     {mediaSwitch === 0 && videos.results.slice(0,3).map((video,index)=>{
                         return <div key={index} className={styles.sec}>
-                        <video src={`https://www.youtube.com/watch?v=${video?.key}`} alt="" autoPlay="off" controls poster={`${baseImgaeUrl}/${movie.backdrop_path}`} />
+                        <iframe src={`https://www.youtube.com/embed/${video?.key}`} />
                     </div>
                     })}
                     {mediaSwitch === 1 && mediaBackrops?.map((media,index)=>{

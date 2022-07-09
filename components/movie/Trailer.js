@@ -12,7 +12,7 @@ return <div className={styles.trailer}>
         </div>
 
         <div className={styles.video}>
-            <video source={`https://www.youtube.com/watch?v=${trailerPath}`} poster={`https://image.tmdb.org/t/p/original/${posterPath}`} controls />
+            <iframe src={`https://www.youtube.com/embed/${trailerPath}`} />
         </div>
     </div>
 </div>

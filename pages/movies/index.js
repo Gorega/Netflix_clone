@@ -8,7 +8,7 @@ import styles from "../../styles/Home.module.css"
 import {getSession} from "next-auth/react";
 import Head from "next/head";
 
-function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
+function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies,trailerPath}){
 
     const [selectValue,setSelectValue] = useState(null);
     const [title,setTitle] = useState(poster.title);
@@ -55,7 +55,7 @@ return <>
     </Head>
     <Nav />
     <div className={styles.home}>
-        <Poster title={title} description={description} poster={posterImage} genres={genres} getMoviePoster={getMoviePoster} route="movies" id={postId} />
+        <Poster title={title} description={description} poster={posterImage} genres={genres} getMoviePoster={getMoviePoster} route="movies" id={postId} trailerPath={trailerPath} />
         <Section title="Movies" list={Movies} />
         <Section title="Popular Movies" list={popular} />
         <Section title="Top Rated Movies" list={topRated} />
@@ -76,9 +76,19 @@ export async function getServerSideProps(context){
         }
     }
 
+    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
+
     const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${28}?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`);
     const data = await response.data.items;
     const randomMovie = data[Math.floor(Math.random() * data.length - 1)]
+
+    // fetch movie Videos
+    const videoRes = await axios.get(`${MDB_URL}/movie/${randomMovie.id}/videos?api_key=${api_key}`,{headers:{
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "text/plain",
+      }});
+      const videoData = await videoRes.data;
 
     // get genres names
     const genresResponse = await axios.get(requests.fetchGernes);
@@ -99,6 +109,7 @@ export async function getServerSideProps(context){
             selectedMovies:data,
             popularMovies:popularMoviesData,
             topRatedMovies:topRatedMoviesData,
+            trailerPath:videoData,
             session
         }
     }

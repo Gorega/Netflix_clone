@@ -154,9 +154,11 @@
     margin-left:0;
 }
 
-.main .leftSec .media .in .list .sec video{
+.main .leftSec .media .in .list .sec video,.main .leftSec .media .in .list .sec iframe{
     width:50vh;
     height:30vh;
+    border: none;
+    object-fit: cover;
 }
 
 .main .leftSec .media .in .list .sec img{

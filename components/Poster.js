@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Trailer from "../components/movie/Trailer";
 
-function Poster({title,description,poster,genres,getMoviePoster,route,id}){
+function Poster({title,trailerPath,description,poster,genres,getMoviePoster,route,id}){
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const [playMovie,setPlayMovie] = useState(false);
     const router = useRouter();
@@ -33,7 +33,7 @@ return <div className={styles.poster} style={{backgroundImage:`url(${baseImgaeUr
         </div>
     </div>
 
-    {playMovie && <Trailer closeTrailer={()=> setPlayMovie(false)} trailerPath={""} posterPath={poster} />}
+    {playMovie && <Trailer closeTrailer={()=> setPlayMovie(false)} trailerPath={trailerPath?.results[0]?.key} posterPath={poster} />}
 </div>
 
 }

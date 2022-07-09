@@ -42,7 +42,6 @@ export async function getServerSideProps(context){
             }
         }
     }
-
     const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
     const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const {movieId} = context.params
