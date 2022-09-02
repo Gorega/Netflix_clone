@@ -32,9 +32,9 @@ return <div className={styles.side}>
         <div className={styles.sec}>
             <h3>Keywords</h3>
             <ul>
-                {keyword.results && keyword.results.length > 0 ? keyword.results.map((keyword,index)=>{
+                {keyword.results && keyword.results.length > 0 ? keyword.results?.map((keyword,index)=>{
                     return <li key={index}>{keyword.name}</li>
-                }) : "-" || keyword.keywords && keyword.keywords.length > 0 ? keyword.keywords.map((keyword,index)=>{
+                }) : "-" || keyword.keywords && keyword.keywords.length > 0 ? keyword.keywords?.map((keyword,index)=>{
                     return <li key={index}>{keyword.name}</li>
                 }) : "-"}
             </ul>

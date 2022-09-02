@@ -72,6 +72,7 @@
 .header .content .info .control{
     margin-top:20px;
     display: inline-flex;
+    align-items: center;
 }
 
 .header .content .info .control .score{
@@ -86,9 +87,9 @@
 }
 
 .header .content .info .control .score h5{
-    width:48px;
-    height:48px;
-    outline: 3px solid green;
+    width:67px;
+    height:67px;
+    outline: 3.5px solid green;
     border-radius: 50%;
     position:relative;
 }
@@ -163,6 +164,7 @@
     display: inline-flex;
     align-items: center;
     margin-left:25px;
+    margin-top:15px;
     cursor: pointer;
 }
 

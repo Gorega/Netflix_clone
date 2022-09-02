@@ -87,7 +87,7 @@ return <div className={styles.main}>
 
             <div className={styles.in}>
                 <div className={styles.list}>
-                    {mediaSwitch === 0 && videos.results.slice(0,3).map((video,index)=>{
+                    {mediaSwitch === 0 && videos.results?.slice(0,3).map((video,index)=>{
                         return <div key={index} className={styles.sec}>
                         <iframe src={`https://www.youtube.com/embed/${video?.key}`} />
                     </div>
@@ -109,7 +109,7 @@ return <div className={styles.main}>
         <div className={styles.recommended}>
             <h2>Recommendations</h2>
             <div className={styles.list}>
-                {recommendation.map((movie,index)=>{
+                {recommendation?.map((movie,index)=>{
                     return <div key={index} className={styles.sec}>
                     <img onClick={()=> router.push(`/${route}/${movie.id}`)} src={`${baseImgaeUrl}/${movie.poster_path}`} alt="" />
                     <h4 onClick={()=> router.push(`/${route}/${movie.id}`)}>{movie.title || movie.name}</h4>

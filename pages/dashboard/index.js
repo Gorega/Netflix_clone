@@ -5,9 +5,25 @@ import styles from "../../styles/Home.module.css";
 import axios from "axios";
 import { requests } from "../../lib/requests";
 import { getSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-export default function Home({poster,moviesList,tvLists,playingNow,trailerPath}) {
+export default function Home({poster,moviesList,tvLists,playingNow}) {
   
+  const [trailerPath,setTrailerPath] = useState([]);
+
+  const fetchRandomMovieTrailer = async ()=>{
+      const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+      const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
+
+      const videoRes = await axios.get(`${MDB_URL}/movie/${poster.id}/videos?api_key=${api_key}`);
+      const videoData = await videoRes.data;
+      setTrailerPath(videoData);
+  }
+
+  useEffect(()=>{
+    fetchRandomMovieTrailer();
+  },[])
+
   return <>
   <Nav />
   <div className={styles.home}>
@@ -30,9 +46,6 @@ export async function getServerSideProps(context){
       }
     }
 
-    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
-    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
-
     // getNowPlayingMovies
     const Response = await axios.get(requests.fetchNowPlayingMovies);
     const data = await Response.data.results;
@@ -41,13 +54,6 @@ export async function getServerSideProps(context){
     const moviesResponse = await axios.get(requests.fetchDiscoverMovies);
     const moviesList = await moviesResponse.data.results;
     const getRandomMovie = moviesList[Math.floor(Math.random() * moviesList.length - 1)];
-
-    // fetch movie Videos
-    const videoRes = await axios.get(`${MDB_URL}/movie/${getRandomMovie.id}/videos?api_key=${api_key}`,{headers:{
-      "Access-Control-Allow-Origin": "*",
-      "Content-Type": "text/plain",
-    }});
-    const videoData = await videoRes.data;
 
     // getTVShowsList
     const tvResponse = await axios.get(requests.fetchDiscoverTv);
@@ -59,7 +65,6 @@ export async function getServerSideProps(context){
       playingNow:data,
       moviesList:moviesList,
       tvLists:tvLists,
-      trailerPath:videoData
     }
   }
 }

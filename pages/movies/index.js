@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useState } from "react";
+import {useEffect, useState } from "react";
 import Poster from "../../components/Poster";
 import Section from "../../components/Section";
 import Nav from "../../components/Nav";
@@ -8,7 +8,7 @@ import styles from "../../styles/Home.module.css"
 import {getSession} from "next-auth/react";
 import Head from "next/head";
 
-function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies,trailerPath}){
+function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
 
     const [selectValue,setSelectValue] = useState(null);
     const [title,setTitle] = useState(poster.title);
@@ -18,7 +18,7 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies,trail
     const [Movies,setMovies] = useState(selectedMovies);
     const [popular,setPopular] = useState(popularMovies);
     const [topRated,setTopRated] = useState(topRatedMovies);
-
+    const [trailerPath,setTrailerPath] = useState([]);
 
     const getMoviePoster = (e)=>{
         setSelectValue(e.target.value);
@@ -48,6 +48,19 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies,trail
         }).catch(err => console.log(err));
     }
 
+    const fetchRandomMovieTrailer = async ()=>{
+        const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+        const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
+
+        const videoRes = await axios.get(`${MDB_URL}/movie/${poster.id}/videos?api_key=${api_key}`);
+        const videoData = await videoRes.data;
+        setTrailerPath(videoData);
+    }
+
+    useEffect(()=>{
+        fetchRandomMovieTrailer();
+    },[])
+
 
 return <>
     <Head>
@@ -76,19 +89,9 @@ export async function getServerSideProps(context){
         }
     }
 
-    const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
-    const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
-
     const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${28}?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`);
     const data = await response.data.items;
     const randomMovie = data[Math.floor(Math.random() * data.length - 1)]
-
-    // fetch movie Videos
-    const videoRes = await axios.get(`${MDB_URL}/movie/${randomMovie.id}/videos?api_key=${api_key}`,{headers:{
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "text/plain",
-      }});
-      const videoData = await videoRes.data;
 
     // get genres names
     const genresResponse = await axios.get(requests.fetchGernes);
@@ -109,7 +112,6 @@ export async function getServerSideProps(context){
             selectedMovies:data,
             popularMovies:popularMoviesData,
             topRatedMovies:topRatedMoviesData,
-            trailerPath:videoData,
             session
         }
     }
