@@ -51,24 +51,24 @@ export async function getServerSideProps(context){
         }
     }
 
-    const response = await axios.get(requests.fetchDiscoverTv);
-    const data = await response.data.results;
-    const randomTvShow = data[Math.floor(Math.random() * data.length - 1)];
-
-    // fetch popular tv
-    const popularTvRes = await axios.get(requests.fetchAiringTodayTv);
-    const popularTvData = await popularTvRes.data.results;
-
-    // fetch top_rated tv
-    const topRatedTvRes = await axios.get(requests.fetchTopRatedTv);
-    const topRatedTvData = await topRatedTvRes.data.results;
+    const [tvShowsRes,popularTvShowRes,topRatedTvShowRes] = await Promise.all([
+        axios.get(requests.fetchDiscoverTv),
+        axios.get(requests.fetchAiringTodayTv),
+        axios.get(requests.fetchTopRatedTv),
+      ]);
+  
+      const [tvShows,popularTvShows,topRatedTvShows] = await Promise.all([
+        tvShowsRes.data.results,
+        popularTvShowRes.data.results,
+        topRatedTvShowRes.data.results,
+      ]);
 
     return {
         props:{
-            poster:randomTvShow,
-            tvShows:data,
-            popularTv:popularTvData,
-            topRatedTv:topRatedTvData,
+            poster:tvShows[Math.floor(Math.random() * tvShows.length - 1)],
+            tvShows:tvShows,
+            popularTv:popularTvShows,
+            topRatedTv:topRatedTvShows,
             session
         }
     }

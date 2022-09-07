@@ -70,33 +70,37 @@ export async function getServerSideProps(context){
 
     const {tvId} = context.params
 
-    const response = await axios.get(`${MDB_URL}/tv/${tvId}?api_key=${api_key}`);
-    const data = await response.data;
+    if(!tvId){
+        return{
+            redirect:{
+                destination:"/dashboard"
+            }
+        }
+    }
 
-    // fetch movie Paricipants
-    const ParicipantsRes = await axios.get(`${MDB_URL}/tv/${tvId}/credits?api_key=${api_key}`);
-    const ParicipantsData = await ParicipantsRes.data;
+    const [tvShowRes,creditsRes,reviewsRes,keywordsRes,socialLinksRes] = await Promise.all([
+        axios.get(`${MDB_URL}/tv/${tvId}?api_key=${api_key}`),
+        axios.get(`${MDB_URL}/tv/${tvId}/credits?api_key=${api_key}`),
+        axios.get(`${MDB_URL}/tv/${tvId}/reviews?api_key=${api_key}`),
+        axios.get(`${MDB_URL}/tv/${tvId}/keywords?api_key=${api_key}`),
+        axios.get(`${MDB_URL}/tv/${tvId}/external_ids?api_key=${api_key}`)
+    ])
 
-    // fetch movie Reviews
-    const reviewsRes = await axios.get(`${MDB_URL}/tv/${tvId}/reviews?api_key=${api_key}`);
-    const reviewsData = await reviewsRes.data.results;
-
-    
-    // fetch movie keywords
-    const keywordsRes = await axios.get(`${MDB_URL}/tv/${tvId}/keywords?api_key=${api_key}`);
-    const keywordsData = await keywordsRes.data;
-    
-    // fetch movie social media links
-    const socialRes = await axios.get(`${MDB_URL}/tv/${tvId}/external_ids?api_key=${api_key}`);
-    const socialData = await socialRes.data;
+    const [tvShow,credits,reviews,keywords,socialLinks] = await Promise.all([
+        tvShowRes.data,
+        creditsRes.data,
+        reviewsRes.data.results,
+        keywordsRes.data,
+        socialLinksRes.data
+    ])
     
     return{
         props:{
-            movie:data,
-            credits:ParicipantsData,
-            reviews:reviewsData,
-            keywords:keywordsData,
-            socialLinks:socialData,
+            movie:tvShow,
+            credits:credits,
+            reviews:reviews,
+            keywords:keywords,
+            socialLinks:socialLinks,
             session
         }
     }

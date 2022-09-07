@@ -46,25 +46,25 @@ export async function getServerSideProps(context){
       }
     }
 
-    // getNowPlayingMovies
-    const Response = await axios.get(requests.fetchNowPlayingMovies);
-    const data = await Response.data.results;
+    const [nowPlayingMoviesRes,moviesListRes,tvShowsListRes] = await Promise.all([
+      axios.get(requests.fetchNowPlayingMovies),
+      axios.get(requests.fetchDiscoverMovies),
+      axios.get(requests.fetchDiscoverTv)
+    ]);
 
-    // getMoviesList
-    const moviesResponse = await axios.get(requests.fetchDiscoverMovies);
-    const moviesList = await moviesResponse.data.results;
-    const getRandomMovie = moviesList[Math.floor(Math.random() * moviesList.length - 1)];
+    const [nowPlayingMovies,moviesList,tvShowList] = await Promise.all([
+      nowPlayingMoviesRes.data.results,
+      moviesListRes.data.results,
+      tvShowsListRes.data.results
+    ]);
 
-    // getTVShowsList
-    const tvResponse = await axios.get(requests.fetchDiscoverTv);
-    const tvLists = await tvResponse.data.results;
-
-  return {
-    props:{
-      poster:getRandomMovie,
-      playingNow:data,
-      moviesList:moviesList,
-      tvLists:tvLists,
+    return {
+      props:{
+        poster:moviesList[Math.floor(Math.random() * moviesList.length - 1)],
+        playingNow:nowPlayingMovies,
+        moviesList:moviesList,
+        tvLists:tvShowList,
+      }
     }
-  }
+
 }

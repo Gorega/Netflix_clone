@@ -8,6 +8,9 @@ import styles from "../../styles/Home.module.css"
 import {getSession} from "next-auth/react";
 import Head from "next/head";
 
+const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
+const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
+
 function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
 
     const [selectValue,setSelectValue] = useState(null);
@@ -22,7 +25,7 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
 
     const getMoviePoster = (e)=>{
         setSelectValue(e.target.value);
-        axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/discover/movie?with_genres=${e.target.value}&api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`)
+        axios.get(`${MDB_URL}/discover/movie?with_genres=${e.target.value}&api_key=${api_key}`)
         .then(res => {
             const randomMovie = res.data.results[Math.floor(Math.random() * res.data.results.length - 1)]
             setTitle(randomMovie.title)
@@ -49,9 +52,6 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
     }
 
     const fetchRandomMovieTrailer = async ()=>{
-        const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
-        const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
-
         const videoRes = await axios.get(`${MDB_URL}/movie/${poster.id}/videos?api_key=${api_key}`);
         const videoData = await videoRes.data;
         setTrailerPath(videoData);
@@ -89,29 +89,27 @@ export async function getServerSideProps(context){
         }
     }
 
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_MDB_URL}/list/${28}?api_key=${process.env.NEXT_PUBLIC_MDB_API_KEY}`);
-    const data = await response.data.items;
-    const randomMovie = data[Math.floor(Math.random() * data.length - 1)]
-
-    // get genres names
-    const genresResponse = await axios.get(requests.fetchGernes);
-    const gerensData = await genresResponse.data.genres;
-
-    // get popular Movies
-    const popularMoviesRes = await axios.get(`${requests.fetchPopularMovies}`);
-    const popularMoviesData = await popularMoviesRes.data.results;
-
-    // get top-rated Movies
-    const topRatedMoviesRes = await axios.get(`${requests.fetchTopRatedMovies}`);
-    const topRatedMoviesData = await topRatedMoviesRes.data.results;
+    const [selectedMoviesRes,genresRes,popularMoviesRes,topRatedMoviesRes] = await Promise.all([
+        axios.get(`${MDB_URL}/list/${28}?api_key=${api_key}`),
+        axios.get(requests.fetchGernes),
+        axios.get(`${requests.fetchPopularMovies}`),
+        axios.get(`${requests.fetchTopRatedMovies}`)
+      ]);
+  
+      const [selectedMovies,genres,popularMovies,topRatedMovies] = await Promise.all([
+        selectedMoviesRes.data.items,
+        genresRes.data.genres,
+        popularMoviesRes.data.results,
+        topRatedMoviesRes.data.results
+      ]);
 
     return{
         props:{
-            genres:gerensData,
-            poster:randomMovie,
-            selectedMovies:data,
-            popularMovies:popularMoviesData,
-            topRatedMovies:topRatedMoviesData,
+            genres:genres,
+            poster:selectedMovies[Math.floor(Math.random() * selectedMovies.length - 1)],
+            selectedMovies:selectedMovies,
+            popularMovies:popularMovies,
+            topRatedMovies:topRatedMovies,
             session
         }
     }

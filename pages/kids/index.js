@@ -51,24 +51,24 @@ export async function getServerSideProps(context){
         }
     }
 
-    const response = await axios.get(`${requests.fetchDiscoverMovies}&with_genres=16`);
-    const data = await response.data.results;
-    const randomMovie = data[Math.floor(Math.random() * data.length - 1)]; 
- 
-    // fetch popular movies
-    const popularMoviesRes = await axios.get(requests.fetchPopularMovies);
-    const popularMoviesData = await popularMoviesRes.data.results.filter((movie)=> movie.genre_ids.includes(16));
-    
-    // fetch top rated movies
-    const topRatedMoviesRes = await axios.get(requests.fetchTopRatedMovies);
-    const topRatedMoviesData = await topRatedMoviesRes.data.results.filter((movie)=> movie.genre_ids.includes(16));
+    const [kidsMoviesRes,popularKidsMoviesListRes,topRatedKidsMoviesListRes] = await Promise.all([
+        axios.get(`${requests.fetchDiscoverMovies}&with_genres=16`),
+        axios.get(requests.fetchPopularMovies),
+        axios.get(requests.fetchTopRatedMovies)
+    ]);
+
+    const [kidsMovies,popularKidsMoviesList,topRatedKidsMovies] = await Promise.all([
+        kidsMoviesRes.data.results,
+        popularKidsMoviesListRes.data.results.filter(movies => movies.genre_ids.includes(16)),
+        topRatedKidsMoviesListRes.data.results.filter(movies => movies.genre_ids.includes(16))
+    ]);
     
     return{
         props:{
-            poster:randomMovie,
-            kidsMovies:data,
-            popularMoviesList:popularMoviesData,
-            topRatedMoviesList:topRatedMoviesData,
+            poster:kidsMovies[Math.floor(Math.random() * kidsMovies .length - 1)],
+            kidsMovies:kidsMovies,
+            popularMoviesList:popularKidsMoviesList,
+            topRatedMoviesList:topRatedKidsMovies,
             session
         }
     }

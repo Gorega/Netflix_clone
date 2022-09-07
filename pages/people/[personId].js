@@ -26,22 +26,24 @@ export async function getServerSideProps(context){
     const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL
     const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
     const {personId} = context.params;
-    const personRes = await axios.get(`${MDB_URL}/person/${personId}?api_key=${api_key}`);
-    const personData = await personRes.data;
 
-    // fetch person credits
-    const creditsRes = await axios.get(`${MDB_URL}/person/${personId}/combined_credits?api_key=${api_key}`);
-    const creditsData = await creditsRes.data;
+    const [personRes,creditsRes,socialLinksRes] = await Promise.all([
+        axios.get(`${MDB_URL}/person/${personId}?api_key=${api_key}`),
+        axios.get(`${MDB_URL}/person/${personId}/combined_credits?api_key=${api_key}`),
+        axios.get(`${MDB_URL}/person/${personId}/external_ids?api_key=${api_key}`)
+    ]);
 
-    // fetch Person Social Links
-    const socialRes = await axios.get(`${MDB_URL}/person/${personId}/external_ids?api_key=${api_key}`);
-    const socialData = await socialRes.data;
+    const [person,credits,socialLinks] = await Promise.all([
+        personRes.data,
+        creditsRes.data,
+        socialLinksRes.data
+    ])
 
     return{
         props:{
-            person:personData,
-            credits:creditsData,
-            socialLinks:socialData,
+            person:person,
+            credits:credits,
+            socialLinks:socialLinks,
             session
         }
     }
