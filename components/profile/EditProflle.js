@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
-import Layout from "./Layout";
-import { useRouter } from "next/router";
 import {server} from "../../lib/server"
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import {useUpload} from "./useUpload";
+import Layout from "./Layout";
 
 function EditProfile({profile}){
     const router = useRouter();
@@ -14,7 +14,7 @@ function EditProfile({profile}){
     const updateProfileHandler = ()=>{
         setError({status:false})
         axios.patch(`${server}/api/profile/update-user/${profile.name}`,{name:profileName,image:imageFile})
-        .then(res=> router.replace("/profile"))
+        .then(_=> router.replace("/profile"))
         .catch(error => {
             setError({status:true,msg:error.response.data.msg})
         });

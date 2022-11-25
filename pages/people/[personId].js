@@ -23,9 +23,9 @@ export async function getServerSideProps(context){
         }
     }
 
+    const {personId} = context.params;
     const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL
     const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
-    const {personId} = context.params;
 
     const [personRes,creditsRes,socialLinksRes] = await Promise.all([
         axios.get(`${MDB_URL}/person/${personId}?api_key=${api_key}`),

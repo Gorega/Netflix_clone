@@ -1,6 +1,6 @@
+import styles from "../../styles/movie/Trailer.module.css"
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../../styles/movie/Trailer.module.css"
 
 function Trailer({closeTrailer,trailerPath,posterPath}){
 

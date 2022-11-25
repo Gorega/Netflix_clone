@@ -1,6 +1,6 @@
+import styles from "../../styles/profile/ProfileFace.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from '@fortawesome/free-solid-svg-icons'
-import styles from "../../styles/profile/ProfileFace.module.css";
 import { useRouter } from "next/router";
 import ProfileControl from "./ProfileControl";
 import { useState,useEffect } from "react";

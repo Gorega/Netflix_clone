@@ -1,11 +1,11 @@
 import styles from "../../styles/movie/Movie.module.css";
-import Header from "../../components/movie/Header";
 import axios from "axios";
-import MovieBody from "../../components/movie/MovieBody";
-import {getSession} from "next-auth/react"
-import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import {getSession} from "next-auth/react"
+import Header from "../../components/movie/Header";
+import MovieBody from "../../components/movie/MovieBody";
+import Head from "next/head";
 
 const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
 const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;

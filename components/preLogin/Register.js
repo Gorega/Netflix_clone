@@ -1,11 +1,11 @@
 import styles from "../../styles/preLogin/Register.module.css";
-import logo from "../../public/img/logo.png";
+import axios from "axios";
+import {server} from "../../lib/server";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner,faCheck } from '@fortawesome/free-solid-svg-icons'
-import {server} from "../../lib/server";
+import logo from "../../public/img/logo.png";
 
 function Register(){
     const router = useRouter();

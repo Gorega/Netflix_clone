@@ -1,12 +1,12 @@
+import styles from "../../styles/People.module.css";
 import axios from "axios";
 import { useState } from "react";
+import { requests } from "../../lib/requests";
+import {getSession} from "next-auth/react"
+import { makeStyles } from '@mui/styles';
 import Nav from "../../components/Nav";
 import PersonCard from "../../components/person/personCard";
-import { requests } from "../../lib/requests";
-import styles from "../../styles/People.module.css";
-import {getSession} from "next-auth/react"
 import Pagination from '@mui/material/Pagination';
-import { makeStyles } from '@mui/styles';
 import Head from "next/head";
 
 const useStyles = makeStyles({

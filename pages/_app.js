@@ -1,5 +1,5 @@
-import AppProvider from '../ContextApi'
 import '../styles/globals.css'
+import AppProvider from '../ContextApi'
 import {SessionProvider} from "next-auth/react";
 import Head from 'next/head';
 import Router from 'next/router';

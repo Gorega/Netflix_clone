@@ -1,12 +1,12 @@
 import styles from "../../styles/Home.module.css";
-import Poster from "../../components/Poster";
-import Section from "../../components/Section"
 import axios from "axios";
-import Nav from "../../components/Nav";
 import { requests } from "../../lib/requests";
 import {getSession} from "next-auth/react"
-import Head from "next/head";
 import { useEffect, useState } from "react";
+import Poster from "../../components/Poster";
+import Section from "../../components/Section"
+import Nav from "../../components/Nav";
+import Head from "next/head";
 
 function Tv({poster,tvShows,popularTv,topRatedTv}){
 

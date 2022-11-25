@@ -1,12 +1,12 @@
+import styles from "../../styles/movie/Header.module.css";
+import axios from "axios";
+import {server} from "../../lib/server"
+import Nav from "../Nav";
+import Trailer from "./Trailer";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookmark,faHeart,faStar,faPlay,faSpinner } from '@fortawesome/free-solid-svg-icons'
-import Trailer from "./Trailer";
-import styles from "../../styles/movie/Header.module.css";
 import {useState,useContext, useEffect} from "react"; 
-import Nav from "../Nav";
 import { AppContext } from "../../ContextApi";
-import {server} from "../../lib/server"
-import axios from "axios";
 import { makeStyles } from '@mui/styles';
 import Rating from '@mui/material/Rating';
 
@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 
 function Header({movie,credits,trailer}){
     const classes = useStyles();
+    const {user} = useContext(AppContext);
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
     const [showTrailer,setShowTrailer] = useState(false);
     const [listedLoading,setListedLoading] = useState(false);
@@ -29,7 +30,6 @@ function Header({movie,credits,trailer}){
         msg:"",
         error:false
     })
-    const {user} = useContext(AppContext);
 
     const addToWatchListHandler = ()=>{
         setListedLoading(true)
@@ -41,7 +41,7 @@ function Header({movie,credits,trailer}){
             score:movie.vote_average,
             type:window.location.pathname.includes("movies") ? "movie" : "tv"
         }})
-        .then(res=> {
+        .then(_=> {
             setListedLoading(false)
             setListed({status:true,msg:"Added to WatchList"})
         })
@@ -63,7 +63,7 @@ function Header({movie,credits,trailer}){
 return <>
 <Nav />
 <div className={styles.header} style={{backgroundImage:`url(${baseImgaeUrl}/${movie.backdrop_path})`}}>
-        <div className={styles.overlay}></div>
+    <div className={styles.overlay}></div>
     <div className={styles.content}>
         <div className={styles.poster}>
             <img src={`${baseImgaeUrl}/${movie.poster_path}`} alt="" />

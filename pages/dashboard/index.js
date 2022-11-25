@@ -1,11 +1,11 @@
-import Poster from "../../components/Poster";
-import Section from "../../components/Section";
-import Nav from "../../components/Nav"
 import styles from "../../styles/Home.module.css";
 import axios from "axios";
 import { requests } from "../../lib/requests";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import Poster from "../../components/Poster";
+import Section from "../../components/Section";
+import Nav from "../../components/Nav"
 
 export default function Home({poster,moviesList,tvLists,playingNow}) {
   

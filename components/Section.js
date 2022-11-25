@@ -6,13 +6,13 @@ import {useRouter} from "next/router"
 
 function Section({title,list,route}){
 
-    const listRef = useRef();
-    let scrollAmount = 250;
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
+    let scrollAmount = 250;
+    let listRefWidth;
+    const listRef = useRef();
+    const router = useRouter();
     const [showControl,setShowControl] = useState(false);
     const [pageWidth,setPageWidth] = useState(null);
-    let listRefWidth;
-    const router = useRouter();
 
     const scrollRight = ()=>{
         listRef.current.scrollBy({

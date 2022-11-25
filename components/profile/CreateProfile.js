@@ -1,9 +1,9 @@
 import axios from "axios";
+import {server} from "../../lib/server";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import {server} from "../../lib/server";
-import Layout from "./Layout";
 import {useUpload} from "./useUpload";
+import Layout from "./Layout";
 
 function CreateProfile(){
     const router = useRouter();

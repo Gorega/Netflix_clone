@@ -1,10 +1,10 @@
 import styles from "../../styles/profile/ProfileFace.module.css";
+import axios from "axios";
+import {server} from "../../lib/server"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit,faTrash } from '@fortawesome/free-solid-svg-icons'
 import {useEffect, useState} from "react";
 import { useRouter } from "next/router";
-import {server} from "../../lib/server"
-import axios from "axios";
 
 function Control({user}){
 
@@ -12,8 +12,7 @@ function Control({user}){
     const router = useRouter();
     const deleteProfileHandler = (profileName)=>{
         axios.patch(`${server}/api/profile/delete-user/${profileName}`)
-        .then(res => window.location.reload())
-        .catch(err => console.log(err))
+        .then(_ => window.location.reload())
     }
 
     useEffect(()=>{

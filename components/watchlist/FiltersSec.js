@@ -1,6 +1,6 @@
+import styles from "../../styles/watchlist/FiltersSec.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown,faCaretRight } from '@fortawesome/free-solid-svg-icons'
-import styles from "../../styles/watchlist/FiltersSec.module.css";
 import { useState } from 'react';
 
 function FiltersSec({searchBoxHandler,searchValue}){

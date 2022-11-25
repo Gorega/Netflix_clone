@@ -1,14 +1,14 @@
-import FiltersSec from "../../components/watchlist/FiltersSec";
-import BodySec from "../../components/watchlist/BodySec";
 import styles from "../../styles/watchlist/WatchlistPage.module.css";
-import Nav from "../../components/Nav";
 import axios from "axios";
+import {server} from "../../lib/server";
 import { useEffect, useState } from "react";
+import { getSession } from "next-auth/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import {server} from "../../lib/server";
+import FiltersSec from "../../components/watchlist/FiltersSec";
+import BodySec from "../../components/watchlist/BodySec";
+import Nav from "../../components/Nav";
 import Head from "next/head";
-import { getSession } from "next-auth/react";
 
 function WatchlistPage(){
     const [loading,setLoading] = useState(false);
@@ -32,21 +32,21 @@ function WatchlistPage(){
     },[])
 
 return <>
-<Head>
-    <title>Your Watchlist</title>
-</Head>
-<Nav />
-<div className={styles.watchlist}>
-    <h2>Watch List</h2>
-    <div className={styles.content}>
-        <div className={styles.filters}>
-            <FiltersSec searchBoxHandler={searchBoxHandler} searchValue={searchValue} />
-        </div>
-        <div className={styles.inner}>
-            {loading ? <div className={styles.loading}><FontAwesomeIcon className="fa-spin" icon={faSpinner} /></div> : <BodySec watchlist={watchList} searchValue={searchValue} />}
+    <Head>
+        <title>Your Watchlist</title>
+    </Head>
+    <Nav />
+    <div className={styles.watchlist}>
+        <h2>Watch List</h2>
+        <div className={styles.content}>
+            <div className={styles.filters}>
+                <FiltersSec searchBoxHandler={searchBoxHandler} searchValue={searchValue} />
+            </div>
+            <div className={styles.inner}>
+                {loading ? <div className={styles.loading}><FontAwesomeIcon className="fa-spin" icon={faSpinner} /></div> : <BodySec watchlist={watchList} searchValue={searchValue} />}
+            </div>
         </div>
     </div>
-</div>
 </>
 
 }

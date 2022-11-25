@@ -1,8 +1,8 @@
+import styles from "../../styles/movie/MovieBody.module.css";
+import axios from "axios";
+import MovieBodySide from "./MovieBodySide";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import styles from "../../styles/movie/MovieBody.module.css";
-import MovieBodySide from "./MovieBodySide";
-import axios from "axios";
 
 function MovieBody({credits,reviews,movie,videos,keywords,social,recommendation,route}){
     
@@ -10,14 +10,14 @@ function MovieBody({credits,reviews,movie,videos,keywords,social,recommendation,
     const avaterImageUrl = "https://www.themoviedb.org/u";
     const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
     const api_key = process.env.NEXT_PUBLIC_MDB_API_KEY;
+    const router = useRouter();
+    const {movieId} = router.query;
+    const {tvId} = router.query;
     const [socialSwitch,setSocialSwitch] = useState(0);
     const [mediaSwitch,setMediaSwitch] = useState(0);
     const [mediaBackrops,setMediaBackdrops] = useState([]);
     const [mediaPosters,setMediaPosters] = useState([]);
     const [showReviewContent,setShowReviewContent] = useState(false);
-    const router = useRouter();
-    const {movieId} = router.query;
-    const {tvId} = router.query;
 
     const fetchMovieMeidaBackdrops = async ()=>{
         const response = await axios.get(`${MDB_URL}/${router.pathname.includes("movie") ? "movie" : "tv"}/${movieId || tvId}/images?api_key=${api_key}`);

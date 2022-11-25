@@ -6,10 +6,10 @@ import { useRouter } from "next/router";
 export function useUpload(){
 
         const defaultProfileImage = `https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png`;
+        const router = useRouter();
         const [progress,setProgress] = useState(null);
         const [imageFile,setImageFile] = useState(defaultProfileImage);
         const [fileName,setFileName] = useState(null)
-        const router = useRouter();
 
         const uploadProfileImage = (e)=>{
             const storage = getStorage();
@@ -25,19 +25,16 @@ export function useUpload(){
                 // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                 setProgress(progress)
-                console.log('Upload is ' + progress + '% done');
                 switch (snapshot.state) {
                 case 'paused':
-                    console.log('Upload is paused');
+                    //
                     break;
                 case 'running':
-                    console.log('Upload is running');
+                    //
                     break;
                 }
             }, 
             (error) => {
-                // A full list of error codes is available at
-                // https://firebase.google.com/docs/storage/web/handle-errors
                 switch (error.code) {
                 case 'storage/unauthorized':
                     // User doesn't have permission to access the object
@@ -69,10 +66,10 @@ export function useUpload(){
         const desertRef = ref(storage, 'media/' + fileName);
         // Delete the file
         deleteObject(desertRef).then(() => {
-        console.log("deleted")
-        setImageFile(defaultProfileImage)
+            // deleted successfuly handler
+            setImageFile(defaultProfileImage)
         }).catch((error) => {
-        console.log(error)
+            // error handler
     });
 
     return router.replace("/profile")

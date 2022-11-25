@@ -4,8 +4,7 @@ import ProfileFace from "../../components/profile/ProfileFace";
 import {server} from "../../lib/server"; 
 
 function UserPage({profiles}){
-return <ProfileFace profiles={profiles} />
-
+    return <ProfileFace profiles={profiles} />
 }
 
 export async function getServerSideProps(context){

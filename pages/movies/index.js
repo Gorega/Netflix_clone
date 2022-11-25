@@ -1,11 +1,11 @@
+import styles from "../../styles/Home.module.css"
 import axios from "axios";
 import {useEffect, useState } from "react";
+import { requests } from "../../lib/requests";
+import {getSession} from "next-auth/react";
 import Poster from "../../components/Poster";
 import Section from "../../components/Section";
 import Nav from "../../components/Nav";
-import { requests } from "../../lib/requests";
-import styles from "../../styles/Home.module.css"
-import {getSession} from "next-auth/react";
 import Head from "next/head";
 
 const MDB_URL = process.env.NEXT_PUBLIC_MDB_URL;
@@ -34,21 +34,20 @@ function Movies({poster,genres,selectedMovies,popularMovies,topRatedMovies}){
             setPosterId(randomMovie.id)
             setMovies(res.data.results);
         })
-        .catch(err => console.log(err));
 
         // get popular movies
         axios.get(requests.fetchPopularMovies)
         .then(res =>{
             const filter = res.data.results.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
             setPopular(filter)
-        }).catch(err => console.log(err));
+        });
 
         // get top rated movies
         axios.get(requests.fetchTopRatedMovies)
         .then(res =>{
             const filter = res.data.results.filter((movie)=> movie.genre_ids.includes(parseInt(e.target.value)));
             setTopRated(filter)
-        }).catch(err => console.log(err));
+        });
     }
 
     const fetchRandomMovieTrailer = async ()=>{

@@ -1,21 +1,20 @@
+import styles from "../../styles/watchlist/BodySec.module.css";
 import axios from "axios";
+import {server} from "../../lib/server";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { AppContext } from "../../ContextApi";
-import styles from "../../styles/watchlist/BodySec.module.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import {server} from "../../lib/server";
 
 function BodySec({watchlist,searchValue}){
     const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
-    const router = useRouter();
     const {user} = useContext(AppContext);
+    const router = useRouter();
 
     const deleteMovieHandler =(movieId)=>{
         axios.patch(`${server}/api/watchlist/delete-from-watchlist/${user.name}`,{movieId})
         .then(res => router.reload())
-        .catch(err => console.log(err));
     }
 
 return <div className={styles.body}>

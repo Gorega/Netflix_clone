@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Register from "../components/preLogin/Register";
 import {useSession} from "next-auth/react";
 import { useRouter } from "next/router";
+import Register from "../components/preLogin/Register";
 
 function Home(){
     const router = useRouter();

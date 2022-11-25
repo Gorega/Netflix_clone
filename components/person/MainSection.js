@@ -1,13 +1,13 @@
+import styles from "../../styles/person/MainSection.module.css";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import styles from "../../styles/person/MainSection.module.css";
 
 function MainSection({person,credits}){
+    const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
+    const router = useRouter();
     const [showBio,setShowBio] = useState(false);
     const [selectFilterValue,setSelectFilterValue] = useState(null);
     const [filteredCredits,setFilteredCredits] = useState([]);
-    const baseImgaeUrl = "https://image.tmdb.org/t/p/original"
-    const router = useRouter();
 
     const selectFilterHandler = (e)=>{
         setSelectFilterValue(e.target.value)
